@@ -1,12 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import App from './components/app';
 import reportWebVitals from './reportWebVitals';
+import { RecoilRoot } from 'recoil';
+import { AuthProvider } from './context/auth';
+
+const theme = extendTheme({ direction: 'rtl' });
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider theme={theme}>
+      <RecoilRoot>
+        <React.Suspense fallback={'loading'}>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </React.Suspense>
+      </RecoilRoot>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
