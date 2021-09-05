@@ -5,6 +5,7 @@ import App from './components/app';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
 import { AuthProvider } from './context/auth';
+import './index.css';
 
 const theme = extendTheme({ direction: 'rtl' });
 
