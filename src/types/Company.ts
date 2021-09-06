@@ -14,6 +14,7 @@ export type Company = {
   lastUpdateDate: number;
   mobile: string;
   name: string;
+  taxId: string;
   paymentAmount: number;
   paymentTerms: number;
   phone: string;

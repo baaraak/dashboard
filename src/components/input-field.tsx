@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import {
   FormControl,
   FormLabel,
   Input,
   FormErrorMessage,
   useMergeRefs,
-} from '@chakra-ui/react';
-import { Controller } from 'react-hook-form';
+} from "@chakra-ui/react";
+import { Controller } from "react-hook-form";
 
 type Props = {
   error?: { message: string };
@@ -24,13 +24,13 @@ const InputField = React.forwardRef(
       error,
       label,
       name,
-      type = 'text',
-      defaultValue = '',
+      type = "text",
+      defaultValue = "",
       control,
       rules,
       ...inputProps
     }: Props,
-    ref
+    ref,
   ) => {
     const refs = useMergeRefs(ref);
     return (
@@ -48,7 +48,7 @@ const InputField = React.forwardRef(
         <FormErrorMessage mt="1">{error && error.message}</FormErrorMessage>
       </FormControl>
     );
-  }
+  },
 );
 
 export default InputField;

@@ -51,6 +51,7 @@ const CompaniesList = ({
         cursor="pointer"
         _hover={{
           borderColor: "blue.600",
+          color: "blue.600",
         }}
         onClick={() => onSelect()}
       >
@@ -65,18 +66,22 @@ const CompaniesList = ({
         >
           <Grid
             gridTemplateColumns={{ base: "1fr", md: "1fr 1fr 1fr" }}
+            gridTemplateRows={{ base: "1fr 1fr 1fr", md: "auto" }}
             px={{ base: 2, md: 12 }}
+            py={{ base: 2, md: 0 }}
+            rowGap={4}
             mb={1}
             fontSize="xs"
             fontWeight="semibold"
             color="gray.700"
           >
-            <Box>שם הלקוח</Box>
+            <Box>שם העסק</Box>
             <Box>אימייל</Box>
             <Box>מספר טלפון</Box>
           </Grid>
           <Grid
             gridTemplateColumns={{ base: "1fr", md: "1fr 1fr 1fr" }}
+            gridTemplateRows={{ base: "1fr 1fr 1fr", md: "auto" }}
             border="1px"
             borderColor="gray.100"
             minH={12}

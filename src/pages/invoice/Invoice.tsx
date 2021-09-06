@@ -3,7 +3,7 @@ import { Step, Steps, useSteps } from "chakra-ui-steps";
 import CompaniesList from "../../components/companies-list";
 import Skeletons from "../../components/skeletons";
 import { useCompanies } from "../../hooks/useCompanies";
-import { useDocument } from "../../hooks/useDocument";
+import { Details, DocumentProvider, useDocument } from "../../context/document";
 import { Company } from "../../types/Company";
 import DocumentForm from "../../components/document-form";
 
@@ -12,12 +12,24 @@ const Invoice = () => {
     initialStep: 0,
   });
   const { data: companies, isLoading: isCompaniesLoading } = useCompanies();
-  const { setCompany } = useDocument();
+  const { company, details, catalog, setCompany, setDetails } = useDocument();
 
-  const onSelectCompany = (id?: string) => {
+  const handleSelectCompany = (id?: string) => {
+    if (id !== company?.id && details) {
+      // if user select new company, remove old details fields
+      setDetails(null);
+    }
     if (id) {
       setCompany(companies.filter((c: Company) => c.id === id)[0]);
+    } else {
+      // continue-without/remove client
+      setCompany(null);
     }
+    nextStep();
+  };
+
+  const handleDocumentDetails = (details: Details) => {
+    setDetails(details);
     nextStep();
   };
 
@@ -28,11 +40,18 @@ const Invoice = () => {
           {isCompaniesLoading ? (
             <Skeletons length={10} stackSpace={12} />
           ) : (
-            <CompaniesList companies={companies} onSelect={onSelectCompany} />
+            <CompaniesList
+              companies={companies}
+              onSelect={handleSelectCompany}
+            />
           )}
         </Step>
         <Step label="פרטים" key="פרטים" description="הכנס את פרטי הלקוח">
-          <DocumentForm />
+          <DocumentForm
+            details={details}
+            onSubmit={handleDocumentDetails}
+            company={company}
+          />
         </Step>
 
         <Step label="קטלוג" key="קטלוג" description="בחר מוצרים">
@@ -46,49 +65,44 @@ const Invoice = () => {
       {activeStep === 3 ? (
         <Button onClick={reset}>Reset</Button>
       ) : (
-        <StepButtons
-          {...{ nextStep, prevStep }}
-          prevDisabled={activeStep === 0}
-        />
+        <Flex width="100%" justify="flex-end">
+          <Button
+            ml={4}
+            variant="ghost"
+            onClick={prevStep}
+            colorScheme="facebook"
+            disabled={activeStep === 0}
+          >
+            אחורה
+          </Button>
+          <Button
+            colorScheme="facebook"
+            onClick={nextStep}
+            disabled={checkDisableButton(activeStep, details, catalog)}
+          >
+            הבא
+          </Button>
+        </Flex>
       )}
     </Stack>
   );
 };
 
-type StepButtonsProps = {
-  nextStep?: () => void;
-  prevStep?: () => void;
-  prevDisabled?: boolean;
-  nextDisabled?: boolean;
-  isLast?: boolean;
-};
+function checkDisableButton(
+  activeStep: number,
+  details: any,
+  catalog: any,
+): boolean {
+  if (activeStep === 0) return true;
+  if (activeStep === 1 && !details?.companyName) return true;
+  if (activeStep === 2 && !catalog?.length) return true;
+  return false;
+}
 
-const StepButtons = ({
-  nextStep,
-  prevStep,
-  prevDisabled,
-  nextDisabled,
-  isLast,
-}: StepButtonsProps): JSX.Element => {
+export default function InvoiceWithDocument() {
   return (
-    <Flex width="100%" justify="flex-end">
-      <Button
-        mr={4}
-        variant="ghost"
-        onClick={prevStep}
-        isDisabled={prevDisabled}
-        colorScheme="facebook"
-      >
-        אחורה
-      </Button>
-      <Button
-        isDisabled={nextDisabled}
-        colorScheme="facebook"
-        onClick={nextStep}
-      >
-        {isLast ? "סיים" : "הבא"}
-      </Button>
-    </Flex>
+    <DocumentProvider>
+      <Invoice />
+    </DocumentProvider>
   );
-};
-export default Invoice;
+}
