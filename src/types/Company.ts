@@ -1,0 +1,22 @@
+export type Company = {
+  active: boolean;
+  balanceAmount: number;
+  bankAccount: string;
+  bankBranch: string;
+  bankName: string;
+  contactPerson: string;
+  country: string;
+  creationDate: number;
+  emails: string[];
+  id: string;
+  incomeAmount: number;
+  labels: string[];
+  lastUpdateDate: number;
+  mobile: string;
+  name: string;
+  paymentAmount: number;
+  paymentTerms: number;
+  phone: string;
+  self: false;
+  send: true;
+};

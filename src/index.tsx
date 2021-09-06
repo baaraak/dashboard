@@ -1,19 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import App from './components/app';
-import reportWebVitals from './reportWebVitals';
-import { RecoilRoot } from 'recoil';
-import { AuthProvider } from './context/auth';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { StepsStyleConfig as Steps } from "chakra-ui-steps";
+import App from "./components/app";
+import reportWebVitals from "./reportWebVitals";
+import { RecoilRoot } from "recoil";
+import { AuthProvider } from "./context/auth";
+import "./index.css";
 
-const theme = extendTheme({ direction: 'rtl' });
+const theme = extendTheme({
+  direction: "rtl",
+  components: {
+    Steps,
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <RecoilRoot>
-        <React.Suspense fallback={'loading'}>
+        <React.Suspense fallback={"loading"}>
           <AuthProvider>
             <App />
           </AuthProvider>
@@ -21,7 +27,7 @@ ReactDOM.render(
       </RecoilRoot>
     </ChakraProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root"),
 );
 
 // If you want to start measuring performance in your app, pass a function

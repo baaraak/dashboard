@@ -1,12 +1,13 @@
-import { useMemo, useState, useRef } from 'react';
-import { Stack, useToast, Skeleton, Heading, Center } from '@chakra-ui/react';
-import { usePlatot } from '../../hooks/usePlatot';
-import { Plata as PlataType } from '../../types/Plata';
-import { useAddPlata } from '../../hooks/useAddPlata';
-import { useDeletePlata } from '../../hooks/useDeletePlata';
-import DeletePlataDialog from './DeletePlataDialog';
-import PlataList from './PlataList';
-import AddPlataForm from './AddPlataForm';
+import { useMemo, useState, useRef } from "react";
+import { Stack, useToast, Heading, Center } from "@chakra-ui/react";
+import { usePlatot } from "../../hooks/usePlatot";
+import { Plata as PlataType } from "../../types/Plata";
+import { useAddPlata } from "../../hooks/useAddPlata";
+import { useDeletePlata } from "../../hooks/useDeletePlata";
+import DeletePlataDialog from "./DeletePlataDialog";
+import PlataList from "./PlataList";
+import AddPlataForm from "./AddPlataForm";
+import Skeletons from "../../components/skeletons";
 
 export type AddPlataValues = {
   name: string;
@@ -33,18 +34,18 @@ const Plata = () => {
   const onSubmit = async (values: AddPlataValues) => {
     try {
       await addMutation(values);
-      toast({ status: 'success', description: 'פלטה התווספה בהצלחה!' });
+      toast({ status: "success", description: "פלטה התווספה בהצלחה!" });
     } catch (e) {
-      toast({ status: 'error', description: 'אופס, משהו השתבש' });
+      toast({ status: "error", description: "אופס, משהו השתבש" });
     }
   };
 
   const onDelete = async () => {
     try {
       await deleteMutation(selectedPlata);
-      toast({ status: 'success', description: 'פלטה נמחקה בהצלחה' });
+      toast({ status: "success", description: "פלטה נמחקה בהצלחה" });
     } catch (e) {
-      toast({ status: 'error', description: 'אופס, משהו השתבש' });
+      toast({ status: "error", description: "אופס, משהו השתבש" });
     }
     setSelectedPlata(null);
   };
@@ -56,11 +57,11 @@ const Plata = () => {
             .concat()
             .sort((a, b) => (a.child.length > b.child.length ? -1 : 1))
         : [],
-    [data]
+    [data],
   );
 
   return (
-    <Stack spacing={6} maxW="95%" w={{ md: '6xl' }} m="0 auto">
+    <Stack spacing={6} maxW="95%" w={{ md: "6xl" }} m="0 auto">
       <Heading size="lg" fontWeight="regular">
         הוספת פלטה
       </Heading>
@@ -93,7 +94,9 @@ const Plata = () => {
       >
         <Stack spacing={6} w="100%">
           {isLoading ? (
-            <Skeleton height="20px" />
+            <>
+              <Skeletons length={4} height={16} />
+            </>
           ) : (
             <PlataList
               onDelete={setSelectedPlata}
