@@ -7,10 +7,10 @@ import {
   AccordionButton,
   AccordionPanel,
   Box,
-} from '@chakra-ui/react';
-import { Plata as PlataType } from '../../types/Plata';
-import { BiTrash } from 'react-icons/bi';
-import { DeletePlataValues } from './Plata';
+} from "@chakra-ui/react";
+import { Plata as PlataType } from "types/Plata";
+import { BiTrash } from "react-icons/bi";
+import { DeletePlataValues } from "./Plata";
 
 const PlataList = ({
   list,

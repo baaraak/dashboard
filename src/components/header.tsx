@@ -1,7 +1,7 @@
-import { Button, Flex, Stack, Text, IconButton, Icon } from '@chakra-ui/react';
-import { CgClose, CgMenu } from 'react-icons/cg';
+import { Button, Flex, Stack, Text, IconButton, Icon } from "@chakra-ui/react";
+import { CgClose, CgMenu } from "react-icons/cg";
 
-import { useAuth } from '../context/auth';
+import { useAuth } from "context/auth";
 
 type Props = {
   onToggle: () => void;

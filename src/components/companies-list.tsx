@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Box, Input, Center } from "@chakra-ui/react";
-import { Company } from "../types/Company";
+import { Company } from "types/Company";
 
 const CompaniesList = ({
   companies,

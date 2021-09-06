@@ -16,10 +16,10 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-} from '@chakra-ui/react';
-import { useLocation, Link as RouterLink } from 'react-router-dom';
-import { IconType } from 'react-icons/lib';
-import { AppRoutes } from '../pages/routes';
+} from "@chakra-ui/react";
+import { useLocation, Link as RouterLink } from "react-router-dom";
+import { IconType } from "react-icons/lib";
+import { AppRoutes } from "pages/routes";
 
 type UseDisclosureProps = {
   isOpen: boolean;
@@ -31,14 +31,14 @@ const Sidebar = ({ isOpen, onClose }: UseDisclosureProps) => {
 
   const NavAction = isOpen ? CollapsedItem : NavItem;
 
-  const [isSmallScreen] = useMediaQuery('(max-width: 768px)');
+  const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
 
   if (isSmallScreen) return <MobileSidebar isOpen={isOpen} onClose={onClose} />;
 
   return (
     <Stack
       rounded="xl"
-      w={isOpen ? '60px' : '300px'}
+      w={isOpen ? "60px" : "300px"}
       transition="width .4s ease-in-out"
       py={8}
       bg="white"
@@ -47,8 +47,8 @@ const Sidebar = ({ isOpen, onClose }: UseDisclosureProps) => {
       top="6rem"
       fontSize="sm"
       height="fit-content"
-      display={['none', 'initial', 'initial']}
-      overflowX={isOpen ? 'initial' : 'clip'}
+      display={["none", "initial", "initial"]}
+      overflowX={isOpen ? "initial" : "clip"}
       divider={<Divider m="0 !important" />}
     >
       {AppRoutes.map((route) => (
@@ -71,7 +71,7 @@ const MobileSidebar = ({ isOpen, onClose }: UseDisclosureProps) => {
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose}>
-      <DrawerOverlay display={['initial', 'initial', 'none']}>
+      <DrawerOverlay display={["initial", "initial", "none"]}>
         <DrawerContent layerStyle="neutral" py={8}>
           <Stack spacing={2} fontSize="sm">
             <DrawerCloseButton />
@@ -92,7 +92,7 @@ const MobileSidebar = ({ isOpen, onClose }: UseDisclosureProps) => {
 };
 
 const CollapsedItem = (props: {
-  scheme?: IconButtonProps['colorScheme'];
+  scheme?: IconButtonProps["colorScheme"];
   icon: IconType;
   active?: boolean;
   path: string;
@@ -103,12 +103,12 @@ const CollapsedItem = (props: {
     <Tooltip hasArrow label={props.name} placement="right">
       <LinkBox display="flex" justifyContent="center">
         <IconButton
-          colorScheme={props.active ? 'brand' : props.scheme}
+          colorScheme={props.active ? "brand" : props.scheme}
           aria-label={props.name}
-          variant={props.active ? 'solid' : 'ghost'}
+          variant={props.active ? "solid" : "ghost"}
           boxSize="40px"
           alignSelf="center"
-          _focus={{ shadow: 'none' }}
+          _focus={{ shadow: "none" }}
           icon={
             <>
               <Link to={props.path} as={RouterLink}>
@@ -133,9 +133,9 @@ export type NavItemProps = {
 };
 const NavItem = (props: NavItemProps) => {
   const activeProps: BoxProps = {
-    borderRightColor: 'blue.800',
-    bg: 'gray.100',
-    color: 'black',
+    borderRightColor: "blue.800",
+    bg: "gray.100",
+    color: "black",
   };
 
   return (

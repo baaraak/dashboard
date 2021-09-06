@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Company } from "../types/Company";
+import { Company } from "types/Company";
 
 export type Details = {
   contactPerson: string;
@@ -29,7 +29,7 @@ const DocumentContext = React.createContext<DocumentContextType>({
 function DocumentProvider({ children }: { children: React.ReactChild }) {
   const [company, setCompany] = useState<Company | null>(null);
   const [details, setDetails] = useState<Details | null>(null);
-  const [catalog, setCatalog] = useState(null);
+  const [catalog] = useState(null);
 
   return (
     <DocumentContext.Provider

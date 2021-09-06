@@ -1,11 +1,11 @@
 import { Button, Stack, Flex } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
-import CompaniesList from "../../components/companies-list";
-import Skeletons from "../../components/skeletons";
-import { useCompanies } from "../../hooks/useCompanies";
-import { Details, DocumentProvider, useDocument } from "../../context/document";
-import { Company } from "../../types/Company";
-import DocumentForm from "../../components/document-form";
+import CompaniesList from "components/companies-list";
+import Skeletons from "components/skeletons";
+import { useCompanies } from "hooks/useCompanies";
+import { Details, DocumentProvider, useDocument } from "context/document";
+import { Company } from "types/Company";
+import DocumentForm from "components/document-form";
 
 const Invoice = () => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({

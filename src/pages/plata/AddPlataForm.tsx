@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm } from "react-hook-form";
 import {
   Stack,
   FormLabel,
@@ -6,10 +6,10 @@ import {
   Box,
   Select,
   Button,
-} from '@chakra-ui/react';
-import InputField from '../../components/input-field';
-import { Plata as PlataType } from '../../types/Plata';
-import { AddPlataValues } from './Plata';
+} from "@chakra-ui/react";
+import InputField from "components/input-field";
+import { Plata as PlataType } from "types/Plata";
+import { AddPlataValues } from "./Plata";
 
 const AddPlataForm = ({
   onSubmit,
@@ -35,7 +35,7 @@ const AddPlataForm = ({
           placeholder="מארז לחג"
           control={control}
           rules={{
-            required: 'אנא הכנס שם',
+            required: "אנא הכנס שם",
           }}
           name="name"
         />
@@ -46,7 +46,7 @@ const AddPlataForm = ({
           type="number"
           control={control}
           rules={{
-            required: 'הכנס מחיר או 0',
+            required: "הכנס מחיר או 0",
           }}
           name="price"
         />

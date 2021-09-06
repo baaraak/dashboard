@@ -9,8 +9,8 @@ import {
 } from "@chakra-ui/react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import InputField from "./input-field";
-import { Company } from "../types/Company";
-import { Details } from "../context/document";
+import { Company } from "types/Company";
+import { Details } from "context/document";
 
 import "react-datepicker/dist/react-datepicker.css";
 

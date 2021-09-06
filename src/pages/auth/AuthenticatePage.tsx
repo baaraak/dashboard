@@ -1,9 +1,9 @@
-import { Box, Button, Heading, Center, Stack } from '@chakra-ui/react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import FeedbackMessage from '../../components/feedback-message';
-import InputField from '../../components/input-field';
-import { useAuth } from '../../context/auth';
+import { Box, Button, Heading, Center, Stack } from "@chakra-ui/react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import FeedbackMessage from "components/feedback-message";
+import InputField from "components/input-field";
+import { useAuth } from "context/auth";
 
 export type InputLoginType = {
   username: string;
@@ -38,8 +38,8 @@ const AuthenticatePage = () => {
       <Box
         bg="white"
         py="8"
-        px={{ base: '4', md: '10' }}
-        w={{ base: '95%', md: 'sm' }}
+        px={{ base: "4", md: "10" }}
+        w={{ base: "95%", md: "sm" }}
         shadow="md"
         rounded="xl"
       >
@@ -57,7 +57,7 @@ const AuthenticatePage = () => {
               placeholder="שם משתמש"
               control={control}
               rules={{
-                required: 'אנא הכנס שם משתמש',
+                required: "אנא הכנס שם משתמש",
               }}
               name="username"
             />
@@ -68,7 +68,7 @@ const AuthenticatePage = () => {
               label="סיסמה"
               control={control}
               rules={{
-                required: 'הכנס סיסמה',
+                required: "הכנס סיסמה",
               }}
               name="password"
             />

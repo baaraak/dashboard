@@ -1,8 +1,8 @@
-import { Spinner, Center } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import api from '../services/api';
-import { JWTTokenService } from '../services/token';
-import { User } from '../types/User';
+import { Spinner, Center } from "@chakra-ui/react";
+import React, { useState } from "react";
+import api from "services/api";
+import { JWTTokenService } from "services/token";
+import { User } from "types/User";
 
 type AuthContextType = {
   user?: User;

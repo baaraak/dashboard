@@ -1,13 +1,13 @@
 import { useMemo, useState, useRef } from "react";
 import { Stack, useToast, Heading, Center } from "@chakra-ui/react";
-import { usePlatot } from "../../hooks/usePlatot";
-import { Plata as PlataType } from "../../types/Plata";
-import { useAddPlata } from "../../hooks/useAddPlata";
-import { useDeletePlata } from "../../hooks/useDeletePlata";
+import { usePlatot } from "hooks/usePlatot";
+import { Plata as PlataType } from "types/Plata";
+import { useAddPlata } from "hooks/useAddPlata";
+import { useDeletePlata } from "hooks/useDeletePlata";
 import DeletePlataDialog from "./DeletePlataDialog";
 import PlataList from "./PlataList";
 import AddPlataForm from "./AddPlataForm";
-import Skeletons from "../../components/skeletons";
+import Skeletons from "components/skeletons";
 
 export type AddPlataValues = {
   name: string;
