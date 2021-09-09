@@ -10,30 +10,46 @@ export type Details = {
   dueDate: Date;
 };
 
+export type DocumentItem = {
+  name: string;
+  quantity: number;
+  discount?: number;
+  price?: number;
+};
+
 type DocumentContextType = {
   company: Company | null;
   setCompany: (company: Company | null) => void;
   setDetails: (details: Details | null) => void;
-  catalog: any;
-  details: any;
+  setCatalog: (catalogItem: DocumentItem[]) => void;
+  catalog: DocumentItem[];
+  details: Details | null;
 };
 
 const DocumentContext = React.createContext<DocumentContextType>({
   company: null,
   setCompany: () => {},
   setDetails: () => {},
-  details: "",
-  catalog: "",
+  setCatalog: () => {},
+  details: null,
+  catalog: [],
 });
 
 function DocumentProvider({ children }: { children: React.ReactChild }) {
   const [company, setCompany] = useState<Company | null>(null);
   const [details, setDetails] = useState<Details | null>(null);
-  const [catalog] = useState(null);
+  const [catalog, setCatalog] = useState<DocumentItem[]>([]);
 
   return (
     <DocumentContext.Provider
-      value={{ company, setCompany, catalog, details, setDetails }}
+      value={{
+        company,
+        setCompany,
+        catalog,
+        details,
+        setDetails,
+        setCatalog,
+      }}
       children={children}
     />
   );

@@ -6,13 +6,15 @@ import { useCompanies } from "hooks/useCompanies";
 import { Details, DocumentProvider, useDocument } from "context/document";
 import { Company } from "types/Company";
 import DocumentForm from "components/document-form";
+import PlataCatalog from "components/plata-catalog/PlataCatalog";
 
 const Invoice = () => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
   const { data: companies, isLoading: isCompaniesLoading } = useCompanies();
-  const { company, details, catalog, setCompany, setDetails } = useDocument();
+  const { company, details, catalog, setCompany, setDetails, setCatalog } =
+    useDocument();
 
   const handleSelectCompany = (id?: string) => {
     if (id !== company?.id && details) {
@@ -55,7 +57,7 @@ const Invoice = () => {
         </Step>
 
         <Step label="קטלוג" key="קטלוג" description="בחר מוצרים">
-          step 3
+          <PlataCatalog catalog={catalog} onChange={setCatalog} />
         </Step>
 
         <Step label="סיכום" key="סיכום" description="סיכום ההזמנה">

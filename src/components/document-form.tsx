@@ -25,7 +25,7 @@ const DocumentForm = ({
 }: {
   onSubmit: (values: Details) => void;
   company: Company | null;
-  details: Details;
+  details: Details | null;
 }) => {
   const {
     handleSubmit,

@@ -66,7 +66,6 @@ const CompaniesList = ({
         >
           <Grid
             gridTemplateColumns={{ base: "1fr", md: "1fr 1fr 1fr" }}
-            gridTemplateRows={{ base: "1fr 1fr 1fr", md: "auto" }}
             px={{ base: 2, md: 12 }}
             py={{ base: 2, md: 0 }}
             rowGap={4}
@@ -75,13 +74,12 @@ const CompaniesList = ({
             fontWeight="semibold"
             color="gray.700"
           >
-            <Box>שם העסק</Box>
-            <Box>אימייל</Box>
-            <Box>מספר טלפון</Box>
+            {company.name && <Box>שם העסק</Box>}
+            {company.emails[0] && <Box>אימייל</Box>}
+            {company.phone && <Box>מספר טלפון</Box>}
           </Grid>
           <Grid
             gridTemplateColumns={{ base: "1fr", md: "1fr 1fr 1fr" }}
-            gridTemplateRows={{ base: "1fr 1fr 1fr", md: "auto" }}
             border="1px"
             borderColor="gray.100"
             minH={12}
@@ -99,9 +97,9 @@ const CompaniesList = ({
             }}
             onClick={() => onSelect(company.id)}
           >
-            <Box>{company.name}</Box>
-            <Box>{company.emails[0]}</Box>
-            <Box>{company.phone}</Box>
+            {company.name && <Box>{company.name}</Box>}
+            {company.emails[0] && <Box>{company.emails[0]}</Box>}
+            {company.phone && <Box>{company.phone}</Box>}
           </Grid>
         </Grid>
       ))}
