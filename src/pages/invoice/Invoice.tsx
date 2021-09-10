@@ -1,4 +1,12 @@
-import { Button, Stack, Flex } from "@chakra-ui/react";
+import {
+  Button,
+  Stack,
+  Flex,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 import CompaniesList from "components/companies-list";
 import Skeletons from "components/skeletons";
@@ -7,6 +15,11 @@ import { Details, DocumentProvider, useDocument } from "context/document";
 import { Company } from "types/Company";
 import DocumentForm from "components/document-form";
 import PlataCatalog from "components/plata-catalog/PlataCatalog";
+import DocumentSummary from "components/document-summary";
+import { useMutation } from "react-query";
+import api from "services/api";
+import { transformFields } from "services/document";
+import DocumentSuccess from "components/document-success";
 
 const Invoice = () => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -15,6 +28,13 @@ const Invoice = () => {
   const { data: companies, isLoading: isCompaniesLoading } = useCompanies();
   const { company, details, catalog, setCompany, setDetails, setCatalog } =
     useDocument();
+  const {
+    mutate: createInvoice,
+    isLoading,
+    isSuccess,
+    isError,
+    data,
+  } = useMutation(api.greenInvoice.invoice);
 
   const handleSelectCompany = (id?: string) => {
     if (id !== company?.id && details) {
@@ -33,6 +53,18 @@ const Invoice = () => {
   const handleDocumentDetails = (details: Details) => {
     setDetails(details);
     nextStep();
+  };
+
+  const onSubmit = () => {
+    if (details === null) return;
+    const fields = transformFields(company, details, catalog);
+
+    createInvoice({
+      order: catalog.filter((o) => o.name !== "הנחה"),
+      data: details.data,
+      dueDate: details.dueDate ?? new Date(),
+      ...fields,
+    });
   };
 
   return (
@@ -59,14 +91,33 @@ const Invoice = () => {
         <Step label="קטלוג" key="קטלוג" description="בחר מוצרים">
           <PlataCatalog catalog={catalog} onChange={setCatalog} />
         </Step>
-
-        <Step label="סיכום" key="סיכום" description="סיכום ההזמנה">
-          step 4
+        <Step
+          label="סיכום"
+          key="סיכום"
+          description="סיכום ההזמנה"
+          isCompletedStep={!!data?.success}
+        >
+          {data?.error && (
+            <Alert status="error">
+              <AlertIcon />
+              <AlertTitle mr={2}>שגיאה</AlertTitle>
+              <AlertDescription>{data.error}</AlertDescription>
+            </Alert>
+          )}
+          {data?.success ? (
+            <DocumentSuccess {...data} />
+          ) : (
+            <DocumentSummary
+              onSubmit={onSubmit}
+              details={details}
+              catalog={catalog}
+              isLoading={isLoading}
+            />
+          )}
         </Step>
       </Steps>
-      {activeStep === 3 ? (
-        <Button onClick={reset}>Reset</Button>
-      ) : (
+
+      {!data?.success && (
         <Flex width="100%" justify="flex-end">
           <Button
             ml={4}
@@ -98,6 +149,7 @@ function checkDisableButton(
   if (activeStep === 0) return true;
   if (activeStep === 1 && !details?.name) return true;
   if (activeStep === 2 && !catalog?.length) return true;
+  if (activeStep === 3) return true;
   return false;
 }
 
