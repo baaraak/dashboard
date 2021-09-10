@@ -75,7 +75,7 @@ export default function PlataCatalog({
 
   return (
     <Grid
-      gridTemplateColumns={["1fr", "1fr 40%", "1fr 30%"]}
+      gridTemplateColumns={["1fr", "1fr", "1fr", "1fr 30%"]}
       bg="white"
       shadow="xl"
       rounded="lg"
@@ -107,7 +107,7 @@ export default function PlataCatalog({
         <PlataItem onClick={() => addDiscount(10)}>הנחה 10%</PlataItem>
       </Grid>
       <Flex flexDir="column">
-        <Box maxH="575px" overflowY="auto">
+        <Box h="500px" overflowY="auto">
           <CatalogDetailsTable
             catalog={catalog}
             onRemovePlata={onRemovePlata}
@@ -152,9 +152,9 @@ function PlataWithChildren({ onClickPlata, plata }: any) {
           );
         })}
       </Grid>
-      <div onClick={onClose}>
-        <Button>חזור</Button>
-      </div>
+      <Box pos="absolute" left={2} bottom={2} onClick={onClose}>
+        <Button size="lg">חזור</Button>
+      </Box>
     </Box>
   ) : (
     <PlataItem onClick={onOpen} key={plata.name}>

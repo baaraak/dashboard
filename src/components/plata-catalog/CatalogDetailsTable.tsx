@@ -2,6 +2,7 @@ import {
   Center,
   Table,
   Thead,
+  Tooltip,
   Tr,
   Td,
   Th,
@@ -46,10 +47,12 @@ export function CatalogDetailsTable({
         {catalog.map((o: any) => {
           return (
             <Tr>
-              <Td fontSize="xs">{o.name}</Td>
+              <Td>
+                <Tooltip label={o.name}>{o.name}</Tooltip>
+              </Td>
               <Td fontSize="xs">&#8362;{o.price}</Td>
 
-              <Td fontSize="xs">
+              <Td fontSize="xs" p={0}>
                 {o.name !== "הנחה" && (
                   <NumberInput
                     value={o.quantity}
