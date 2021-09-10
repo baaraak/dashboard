@@ -8,18 +8,20 @@ import {
   AlertDescription,
 } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
-import CompaniesList from "components/companies-list";
-import Skeletons from "components/skeletons";
-import { useCompanies } from "hooks/useCompanies";
-import { Details, DocumentProvider, useDocument } from "context/document";
-import { Company } from "types/Company";
-import DocumentForm from "components/document-form";
-import PlataCatalog from "components/plata-catalog/PlataCatalog";
-import DocumentSummary from "components/document-summary";
 import { useMutation } from "react-query";
-import api from "services/api";
+
+import CompaniesList from "modules/document/companies-list";
+import DocumentForm from "modules/document/document-form";
+import PlataCatalog from "modules/document/plata-catalog/PlataCatalog";
+import DocumentSummary from "modules/document/document-summary";
+import DocumentSuccess from "modules/document/document-success";
+
+import { Details, DocumentProvider, useDocument } from "context/document";
+import { useCompanies } from "hooks/useCompanies";
+import Skeletons from "components/skeletons";
+import { Company } from "types/Company";
 import { transformFields } from "services/document";
-import DocumentSuccess from "components/document-success";
+import api from "services/api";
 
 const Invoice = () => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -31,9 +33,8 @@ const Invoice = () => {
   const {
     mutate: createInvoice,
     isLoading,
-    isSuccess,
-    isError,
     data,
+    reset: resetMutation,
   } = useMutation(api.greenInvoice.invoice);
 
   const handleSelectCompany = (id?: string) => {
@@ -65,6 +66,14 @@ const Invoice = () => {
       dueDate: details.dueDate ?? new Date(),
       ...fields,
     });
+  };
+
+  const onReset = () => {
+    setCompany(null);
+    setDetails(null);
+    setCatalog([]);
+    reset();
+    resetMutation();
   };
 
   return (
@@ -105,7 +114,7 @@ const Invoice = () => {
             </Alert>
           )}
           {data?.success ? (
-            <DocumentSuccess {...data} />
+            <DocumentSuccess {...data} onReset={onReset} />
           ) : (
             <DocumentSummary
               onSubmit={onSubmit}

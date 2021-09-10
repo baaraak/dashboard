@@ -1,15 +1,17 @@
-import { Box, Stack, useDisclosure } from '@chakra-ui/react';
+import { Box, Stack, useDisclosure } from "@chakra-ui/react";
 
-import Navbar from './header';
-import Sidebar from './sidebar';
+import Header from "./header";
+import Sidebar from "../modules/sidebar/sidebar";
+import { useAuth } from "context/auth";
 
-const SiteLayout = ({ children }: any) => {
+const Layout = ({ children }: any) => {
   const sidebarState = useDisclosure();
+  const { user, logout } = useAuth();
 
   return (
     <>
       <Box h="100%" minH="100vh" bg="gray.50">
-        <Navbar {...sidebarState} />
+        <Header {...sidebarState} username={user?.username} logout={logout} />
         <Box pos="relative" h="max-content" m={[2, 0, 5]} pt={6}>
           <Stack direction="row" spacing={{ md: 5 }}>
             <Sidebar {...sidebarState} />
@@ -21,4 +23,4 @@ const SiteLayout = ({ children }: any) => {
   );
 };
 
-export default SiteLayout;
+export default Layout;

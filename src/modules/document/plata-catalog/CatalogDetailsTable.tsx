@@ -46,14 +46,14 @@ export function CatalogDetailsTable({
       <Tbody>
         {catalog.map((o: any) => {
           return (
-            <Tr>
+            <Tr key={o.name}>
               <Td>
                 <Tooltip label={o.name}>{o.name}</Tooltip>
               </Td>
               <Td fontSize="xs">&#8362;{o.price}</Td>
 
               <Td fontSize="xs" p={0}>
-                {o.name !== "הנחה" && (
+                {o.name !== "הנחה" ? (
                   <NumberInput
                     value={o.quantity}
                     onChange={(v: string) => changeQuantity(v, o.name)}
@@ -66,10 +66,12 @@ export function CatalogDetailsTable({
                       <NumberDecrementStepper />
                     </NumberInputStepper>
                   </NumberInput>
+                ) : (
+                  `${o.discount}%`
                 )}
               </Td>
 
-              <Td fontSize="xs">&#8362;{o.price * o.quantity}</Td>
+              <Td fontSize="xs">&#8362;{o.price && o.price * o.quantity}</Td>
               <Td fontSize="md" onClick={() => onRemovePlata(o.name)}>
                 <BiTrash className="removeCircleIcon" />
               </Td>

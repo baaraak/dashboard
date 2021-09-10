@@ -75,7 +75,7 @@ const DocumentSummary = ({
         {details?.dueDate && (
           <ListItem>
             <ListIcon as={BsCalendar} />
-            {details.dueDate}
+            {details.dueDate.toLocaleDateString("he")}
           </ListItem>
         )}
         {details?.data && (
@@ -97,7 +97,7 @@ const DocumentSummary = ({
         <Tbody>
           {catalog.map((o: any) => {
             return (
-              <Tr>
+              <Tr key={o.name}>
                 <Td>{o.name}</Td>
                 <Td>&#8362;{o.price}</Td>
                 <Td>{o.quantity}</Td>

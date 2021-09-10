@@ -1,16 +1,14 @@
 import { Button, Flex, Stack, Text, IconButton, Icon } from "@chakra-ui/react";
 import { CgClose, CgMenu } from "react-icons/cg";
 
-import { useAuth } from "context/auth";
-
 type Props = {
   onToggle: () => void;
+  logout: () => void;
   isOpen: boolean;
+  username?: string;
 };
 
-const Header = ({ onToggle, isOpen }: Props) => {
-  const { user } = useAuth();
-
+const Header = ({ onToggle, isOpen, username, logout }: Props) => {
   const icon = isOpen ? CgClose : CgMenu;
 
   return (
@@ -42,12 +40,12 @@ const Header = ({ onToggle, isOpen }: Props) => {
               רולדין - ראש העין
             </Text>
             <Text fontSize="sm" color="gray.500">
-              מחובר באמצעות: {user?.username}
+              מחובר באמצעות: {username}
             </Text>
           </Flex>
         </Stack>
       </Stack>
-      <Button variant="outline" size="sm">
+      <Button variant="outline" size="sm" onClick={logout}>
         התנתק
       </Button>
     </Flex>

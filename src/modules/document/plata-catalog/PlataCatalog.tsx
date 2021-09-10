@@ -7,7 +7,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { usePlatot } from "hooks/usePlatot";
-import { DocumentItem } from "../../context/document";
+import { DocumentItem } from "../../../context/document";
 import { Plata } from "types/Plata";
 import { getCatalogLength, getCatalogPriceSum } from "./PlataCatalog.services";
 import {

@@ -19,9 +19,11 @@ import {
 export default function DocumentSuccess({
   url,
   number,
+  onReset,
 }: {
   url: string;
   number: number;
+  onReset: () => void;
 }) {
   const [errors, setErrors] = useState<{ phone?: string; email?: string }>({});
   const [email, setEmail] = useState("");
@@ -159,7 +161,7 @@ export default function DocumentSuccess({
             שלח אימייל
           </Button>
         </Flex>
-        <Button>לחץ כאן להתחיל מהתחלה</Button>
+        <Button onClick={onReset}>לחץ כאן להתחיל מהתחלה</Button>
       </Stack>
     </Stack>
   );

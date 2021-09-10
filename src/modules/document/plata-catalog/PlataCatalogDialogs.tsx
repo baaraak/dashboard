@@ -11,7 +11,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { ReactChild, useRef } from "react";
-import InputField from "../input-field";
+import InputField from "../../../components/input-field";
 import PlataItem from "./PlataItem";
 
 export function DiscountDialog({ onSubmit }: { onSubmit: (v: any) => void }) {
@@ -43,6 +43,8 @@ export function DiscountDialog({ onSubmit }: { onSubmit: (v: any) => void }) {
         error={errors.discount}
         label="הוסף הנחה (באחוזים)"
         type="number"
+        min={0}
+        max={100}
         control={control}
         placeholder="הכנס סכום"
         rules={{ required: "אנא הכנס ערך" }}
