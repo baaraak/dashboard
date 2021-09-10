@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { ReactChild, useRef } from "react";
 import InputField from "../input-field";
+import PlataItem from "./PlataItem";
 
 export function DiscountDialog({ onSubmit }: { onSubmit: (v: any) => void }) {
   const {
@@ -156,9 +157,7 @@ export function Dialog({
 
   return (
     <>
-      <div className="plata" onClick={onOpen}>
-        {buttonText}
-      </div>
+      <PlataItem onClick={onOpen}>{buttonText}</PlataItem>
       <AlertDialog
         motionPreset="slideInBottom"
         leastDestructiveRef={cancelRef}

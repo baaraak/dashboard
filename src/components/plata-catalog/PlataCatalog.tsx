@@ -1,6 +1,11 @@
-import React from "react";
-import { Button, Input, Spinner, useDisclosure } from "@chakra-ui/react";
-import { BiTrash } from "react-icons/bi";
+import {
+  Box,
+  Flex,
+  Grid,
+  Button,
+  Spinner,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { usePlatot } from "hooks/usePlatot";
 import { DocumentItem } from "../../context/document";
 import { Plata } from "types/Plata";
@@ -10,6 +15,8 @@ import {
   DeliveryDialog,
   PlataDialog,
 } from "./PlataCatalogDialogs";
+import PlataItem from "./PlataItem";
+import { CatalogDetailsTable } from "./CatalogDetailsTable";
 
 export default function PlataCatalog({
   catalog,
@@ -67,8 +74,18 @@ export default function PlataCatalog({
   if (isLoading) return <Spinner />;
 
   return (
-    <div className="catalog">
-      <div className="platot">
+    <Grid
+      gridTemplateColumns={["1fr", "1fr 40%", "1fr 30%"]}
+      bg="white"
+      shadow="xl"
+      rounded="lg"
+      overflow="hidden"
+    >
+      <Grid
+        templateColumns="repeat(auto-fit, minmax(110px, 1fr))"
+        gridGap="1px"
+        pos="relative"
+      >
         {platot.map((plata: Plata) =>
           plata.child.length > 0 ? (
             <PlataWithChildren
@@ -77,13 +94,9 @@ export default function PlataCatalog({
               onClickPlata={onClickPlata}
             />
           ) : (
-            <div
-              className="plata"
-              onClick={() => onClickPlata(plata)}
-              key={plata.name}
-            >
+            <PlataItem onClick={() => onClickPlata(plata)} key={plata.name}>
               {plata.name}
-            </div>
+            </PlataItem>
           ),
         )}
 
@@ -91,33 +104,34 @@ export default function PlataCatalog({
         <DeliveryDialog onSubmit={handleDialogSubmit} />
         <PlataDialog onSubmit={handleDialogSubmit} />
 
-        <div className="plata" onClick={() => addDiscount(10)}>
-          הנחה 10%
-        </div>
-      </div>
-      <div className="summary">
-        <div className="summary-table-head">פריט</div>
-        <div className="summary-table-head">מחיר</div>
-        <div className="summary-table-head">כמות</div>
-        <div className="summary-table-head">סה"כ</div>
-        <div className="summary-table-head"></div>
-        <CatalogDetails
-          catalog={catalog}
-          onRemovePlata={onRemovePlata}
-          changeQuantity={changeQuantity}
-        />
-      </div>
-      <div className="summary-details">
-        <div className="summary-row">
-          פריטים:
-          <span>{getCatalogLength(catalog)}</span>
-        </div>
-        <div className="summary-row">
-          סה"כ:
-          <span>&#8362;{getCatalogPriceSum(catalog)}</span>
-        </div>
-      </div>
-    </div>
+        <PlataItem onClick={() => addDiscount(10)}>הנחה 10%</PlataItem>
+      </Grid>
+      <Flex flexDir="column">
+        <Box maxH="575px" overflowY="auto">
+          <CatalogDetailsTable
+            catalog={catalog}
+            onRemovePlata={onRemovePlata}
+            changeQuantity={changeQuantity}
+          />
+        </Box>
+        <Box mt="auto" borderTop="1px" borderColor="gray.200">
+          <Flex
+            p={2}
+            justifyContent="space-between"
+            fontWeight="semibold"
+            borderBottom="1px"
+            borderColor="gray.200"
+          >
+            פריטים:
+            <span>{getCatalogLength(catalog)}</span>
+          </Flex>
+          <Flex p={2} justifyContent="space-between" fontWeight="semibold">
+            סה"כ:
+            <span>&#8362;{getCatalogPriceSum(catalog)}</span>
+          </Flex>
+        </Box>
+      </Flex>
+    </Grid>
   );
 }
 
@@ -125,67 +139,26 @@ function PlataWithChildren({ onClickPlata, plata }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return isOpen ? (
-    <div className="parent-plata">
-      {plata.child.map((plata: Plata) => {
-        return (
-          <div
-            className="plata"
-            onClick={() => onClickPlata(plata)}
-            key={plata.name}
-          >
-            {plata.name}
-          </div>
-        );
-      })}
+    <Box pos="absolute" bg="white" w="100%" h="100%">
+      <Grid
+        templateColumns="repeat(auto-fit, minmax(110px, 1fr))"
+        gridGap="1px"
+      >
+        {plata.child.map((plata: Plata) => {
+          return (
+            <PlataItem key={plata.name} onClick={() => onClickPlata(plata)}>
+              {plata.name}
+            </PlataItem>
+          );
+        })}
+      </Grid>
       <div onClick={onClose}>
         <Button>חזור</Button>
       </div>
-    </div>
+    </Box>
   ) : (
-    <div className="plata" onClick={onOpen} key={plata.name}>
+    <PlataItem onClick={onOpen} key={plata.name}>
       {plata.name}
-    </div>
+    </PlataItem>
   );
-}
-
-function CatalogDetails({ catalog, onRemovePlata, changeQuantity }: any) {
-  if (catalog.length === 0) return <div className="emptyCell">אין מוצרים</div>;
-  return catalog.map((o: any) => {
-    if (o.discount) {
-      return (
-        <React.Fragment key={o.name}>
-          <div className="cell">{o.name}</div>
-          <div className="cell">{o.discount}%</div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell" onClick={() => onRemovePlata(o.name)}>
-            <BiTrash />
-          </div>
-        </React.Fragment>
-      );
-    }
-    return (
-      <React.Fragment key={o.name}>
-        <div className="cell">{o.name}</div>
-        <div className="cell">&#8362;{o.price}</div>
-        {
-          <div className="cell">
-            {o.name !== "הנחה" && (
-              <Input
-                id="textfield__quantity"
-                className="textfield"
-                value={o.quantity}
-                onChange={(e) => changeQuantity(e.target.value, o.name)}
-                type="number"
-              />
-            )}
-          </div>
-        }
-        <div className="cell">&#8362;{o.price * o.quantity}</div>
-        <div className="cell" onClick={() => onRemovePlata(o.name)}>
-          <BiTrash className="removeCircleIcon" />
-        </div>
-      </React.Fragment>
-    );
-  });
 }

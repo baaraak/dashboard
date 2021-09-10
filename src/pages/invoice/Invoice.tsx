@@ -96,7 +96,7 @@ function checkDisableButton(
   catalog: any,
 ): boolean {
   if (activeStep === 0) return true;
-  if (activeStep === 1 && !details?.companyName) return true;
+  if (activeStep === 1 && !details?.name) return true;
   if (activeStep === 2 && !catalog?.length) return true;
   return false;
 }
