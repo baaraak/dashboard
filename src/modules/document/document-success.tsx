@@ -21,8 +21,8 @@ export default function DocumentSuccess({
   number,
   onReset,
 }: {
-  url: string;
-  number: number;
+  url?: string;
+  number?: number;
   onReset: () => void;
 }) {
   const [errors, setErrors] = useState<{ phone?: string; email?: string }>({});
