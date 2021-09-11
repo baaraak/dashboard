@@ -41,7 +41,6 @@ const PlataList = ({
                   flexDirection="row-reverse"
                   justifyContent="flex-end"
                   fontWeight="semibold"
-                  p={0}
                 >
                   {plata.name}
                   <AccordionIcon />
