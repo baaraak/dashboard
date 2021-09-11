@@ -4,7 +4,6 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 import App from "./components/app";
 import reportWebVitals from "./reportWebVitals";
-import { RecoilRoot } from "recoil";
 import { AuthProvider } from "./context/auth";
 import "./index.css";
 
@@ -18,13 +17,11 @@ const theme = extendTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <RecoilRoot>
-        <React.Suspense fallback={"loading"}>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </React.Suspense>
-      </RecoilRoot>
+      <React.Suspense fallback={"loading"}>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </React.Suspense>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root"),
