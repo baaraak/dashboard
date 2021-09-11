@@ -83,7 +83,7 @@ const DocumentForm = ({
         />
         <FormControl>
           <FormLabel htmlFor="dueDate">תאריך לתשלום</FormLabel>
-          <div className="light-theme">
+          <div className="chakra-datepicker">
             <Controller
               name="dueDate"
               control={control}

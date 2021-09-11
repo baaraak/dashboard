@@ -7,7 +7,12 @@
     }
 }
 
-.light-theme {
+
+/*
+ * Add styles to `react-datepicker` package to match chakra-ui styles 
+ */
+
+.chakra-datepicker {
     --light-gray: var(--chakra-colors-gray-200);
     --gray: var(--chakra-colors-gray-300);
     --blue700: var(--chakra-colors-blue-600);
