@@ -12,13 +12,13 @@ import { Plata as PlataType } from "types/Plata";
 import { BiTrash } from "react-icons/bi";
 import { DeletePlataValues } from "./Plata";
 
-const PlataList = ({
+export default function PlatotList({
   list,
   onDelete,
 }: {
   list: PlataType[];
   onDelete: (data: DeletePlataValues) => void;
-}) => {
+}) {
   return (
     <>
       {list.map((plata: PlataType) => (
@@ -97,6 +97,4 @@ const PlataList = ({
       ))}
     </>
   );
-};
-
-export default PlataList;
+}

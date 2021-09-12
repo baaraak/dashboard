@@ -47,7 +47,7 @@ const AuthenticatePage = () => {
           התחבר לחשבון
         </Heading>
         {serverError && (
-          <FeedbackMessage status="error" message={serverError} />
+          <FeedbackMessage status="error" description={serverError} />
         )}
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing="6">

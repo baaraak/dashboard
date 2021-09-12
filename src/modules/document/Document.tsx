@@ -1,6 +1,5 @@
 import {
   Button,
-  Stack,
   Flex,
   Alert,
   AlertIcon,
@@ -21,6 +20,7 @@ import { useCompanies } from "hooks/useCompanies";
 import Skeletons from "components/skeletons";
 import { Company } from "types/Company";
 import { transformFields } from "services/document";
+import FeedbackMessage from "components/feedback-message";
 
 interface Props extends UseMutationResult {
   data: {
@@ -114,11 +114,11 @@ export default function Document({ mutate, isLoading, data, reset }: Props) {
           isCompletedStep={!!data?.success}
         >
           {data?.error && (
-            <Alert status="error">
-              <AlertIcon />
-              <AlertTitle mr={2}>שגיאה</AlertTitle>
-              <AlertDescription>{data.error}</AlertDescription>
-            </Alert>
+            <FeedbackMessage
+              status="error"
+              description={data.error}
+              title="שגיאה"
+            />
           )}
           {data?.success ? (
             <DocumentSuccess

@@ -1,16 +1,25 @@
-import { Alert, AlertIcon, AlertStatus } from '@chakra-ui/alert';
+import {
+  Alert,
+  AlertIcon,
+  AlertStatus,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/alert";
 
 const FeedbackMessage = ({
   status,
-  message,
+  title,
+  description,
 }: {
+  title?: string;
+  description: string;
   status: AlertStatus;
-  message: string;
 }) => {
   return (
     <Alert status={status}>
       <AlertIcon />
-      {message}
+      {title && <AlertTitle mr={2}>{title}</AlertTitle>}
+      <AlertDescription>{description}</AlertDescription>
     </Alert>
   );
 };

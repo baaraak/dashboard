@@ -1,13 +1,13 @@
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState } from "react";
 import { Stack, useToast, Heading, Center } from "@chakra-ui/react";
 import { usePlatot } from "hooks/usePlatot";
 import { Plata as PlataType } from "types/Plata";
 import { useAddPlata } from "hooks/useAddPlata";
 import { useDeletePlata } from "hooks/useDeletePlata";
-import DeletePlataDialog from "./DeletePlataDialog";
-import PlataList from "./PlataList";
-import AddPlataForm from "./AddPlataForm";
+import PlataList from "./platot-list";
+import AddPlataForm from "./add-plata-form";
 import Skeletons from "components/skeletons";
+import ConfirmDialog from "components/confirm-dialog";
 
 export type AddPlataValues = {
   name: string;
@@ -20,11 +20,10 @@ export type DeletePlataValues = {
   parent?: string;
 } | null;
 
-const Plata = () => {
+export default function Plata() {
   const { data, isLoading } = usePlatot();
 
   const [selectedPlata, setSelectedPlata] = useState<DeletePlataValues>(null);
-  const cancelRef = useRef(null);
   const { mutateAsync: addMutation, isLoading: isAddMutationLoading } =
     useAddPlata();
   const { mutateAsync: deleteMutation, isLoading: isDeleteMutationLoading } =
@@ -105,15 +104,13 @@ const Plata = () => {
           )}
         </Stack>
       </Center>
-      <DeletePlataDialog
+      <ConfirmDialog
+        children="למחוק את הפלטה?"
         onClose={() => setSelectedPlata(null)}
         onDelete={onDelete}
         isOpen={!!selectedPlata}
-        cancelRef={cancelRef}
         isLoading={isDeleteMutationLoading}
       />
     </Stack>
   );
-};
-
-export default Plata;
+}

@@ -11,7 +11,7 @@ import InputField from "components/input-field";
 import { Plata as PlataType } from "types/Plata";
 import { AddPlataValues } from "./Plata";
 
-const AddPlataForm = ({
+export default function AddPlataForm({
   onSubmit,
   isLoading,
   platotList,
@@ -19,7 +19,7 @@ const AddPlataForm = ({
   platotList: PlataType[];
   onSubmit: (v: AddPlataValues) => void;
   isLoading: boolean;
-}) => {
+}) {
   const {
     handleSubmit,
     control,
@@ -73,6 +73,4 @@ const AddPlataForm = ({
       </Stack>
     </Box>
   );
-};
-
-export default AddPlataForm;
+}
