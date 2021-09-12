@@ -1,5 +1,5 @@
-import { ReactChild, ReactElement } from "react";
-import { Flex, Center, Box, Spinner } from "@chakra-ui/react";
+import { ReactElement } from "react";
+import { Center, Box, Spinner } from "@chakra-ui/react";
 
 export default function SpinnerContainer({
   children,

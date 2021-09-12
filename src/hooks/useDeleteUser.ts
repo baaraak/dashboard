@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "react-query";
-import { DeletePlataValues } from "pages/plata/Plata";
 import api from "services/api";
 
 export function useDeleteUser() {

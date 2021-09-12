@@ -1,11 +1,4 @@
-import {
-  Button,
-  Flex,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 import { UseMutationResult } from "react-query";
 

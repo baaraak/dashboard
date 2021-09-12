@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Stack, useToast, Heading, Center, Grid } from "@chakra-ui/react";
+import { Stack, useToast, Heading, Center } from "@chakra-ui/react";
 
 import Skeletons from "components/skeletons";
 import { useUsers } from "hooks/useUsers";
 import { User } from "types/User";
 import ConfirmDialog from "components/confirm-dialog";
 import UsersList from "./users-list";
-import { AiOutlineUserAdd } from "react-icons/ai";
 import AddUser from "./add-user";
 import { useDeleteUser } from "hooks/useDeleteUser";
 import { useUpdatePermission } from "hooks/useUpdatePermission";
