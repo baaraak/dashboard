@@ -31,7 +31,7 @@ const Sidebar = ({ isOpen, onClose }: UseDisclosureProps) => {
 
   const NavAction = isOpen ? CollapsedItem : NavItem;
 
-  const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
+  const [isSmallScreen] = useMediaQuery("(max-width: 1460px)");
 
   if (isSmallScreen) return <MobileSidebar isOpen={isOpen} onClose={onClose} />;
 

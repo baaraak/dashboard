@@ -15,12 +15,6 @@ export type AddPlataValues = {
   price: string;
   parent?: string;
 };
-
-export type DeletePlataValues = {
-  _id: string;
-  parent?: string;
-} | null;
-
 export default function Users() {
   const { data, isLoading } = useUsers();
   const [collapsedUser, setCollapsedUser] = useState<string>();
@@ -63,7 +57,7 @@ export default function Users() {
         ניהול משתמשים
       </Heading>
       <Center>
-        <Stack spacing={6} w="100%">
+        <Stack spacing={4} w="100%">
           <AddUser />
 
           {isLoading ? (

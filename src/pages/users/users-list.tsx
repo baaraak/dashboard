@@ -93,18 +93,6 @@ export default function UsersList({
           <Text
             borderBottom="1px"
             borderColor="transparent"
-            ml={3}
-            transition="border .2s ease-in"
-            color="blue.600"
-            _hover={{
-              borderColor: "blue.600",
-            }}
-          >
-            עריכה
-          </Text>
-          <Text
-            borderBottom="1px"
-            borderColor="transparent"
             color="red"
             transition="border .2s ease-in"
             onClick={(e) => {

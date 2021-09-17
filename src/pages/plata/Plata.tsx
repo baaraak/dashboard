@@ -1,13 +1,14 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Stack, useToast, Heading, Center } from "@chakra-ui/react";
-import { usePlatot } from "hooks/usePlatot";
-import { Plata as PlataType } from "types/Plata";
-import { useAddPlata } from "hooks/useAddPlata";
-import { useDeletePlata } from "hooks/useDeletePlata";
-import PlataList from "./platot-list";
-import AddPlataForm from "./add-plata-form";
+
 import Skeletons from "components/skeletons";
 import ConfirmDialog from "components/confirm-dialog";
+
+import { usePlatot } from "hooks/usePlatot";
+import PlatotList from "./platot-list";
+import { Plata as PlataType } from "types/Plata";
+import AddPlataForm from "./add-plata-form";
+import { useDeletePlata } from "hooks/useDeletePlata";
 
 export type AddPlataValues = {
   name: string;
@@ -15,100 +16,57 @@ export type AddPlataValues = {
   parent?: string;
 };
 
-export type DeletePlataValues = {
-  _id: string;
-  parent?: string;
-} | null;
-
 export default function Plata() {
   const { data, isLoading } = usePlatot();
-
-  const [selectedPlata, setSelectedPlata] = useState<DeletePlataValues>(null);
-  const { mutateAsync: addMutation, isLoading: isAddMutationLoading } =
-    useAddPlata();
+  const [collapsedPlata, setCollapsedPlata] = useState<string>();
+  const [confirmPlataDelete, setConfirmPlataDelete] = useState<string>();
   const { mutateAsync: deleteMutation, isLoading: isDeleteMutationLoading } =
     useDeletePlata();
   const toast = useToast();
 
-  const onSubmit = async (values: AddPlataValues) => {
-    try {
-      await addMutation(values);
-      toast({ status: "success", description: "פלטה התווספה בהצלחה!" });
-    } catch (e) {
-      toast({ status: "error", description: "אופס, משהו השתבש" });
-    }
-  };
-
   const onDelete = async () => {
+    if (!confirmPlataDelete) return;
     try {
-      await deleteMutation(selectedPlata);
+      await deleteMutation(confirmPlataDelete);
       toast({ status: "success", description: "פלטה נמחקה בהצלחה" });
     } catch (e) {
       toast({ status: "error", description: "אופס, משהו השתבש" });
     }
-    setSelectedPlata(null);
+    setConfirmPlataDelete("");
   };
-
-  const sortedPlatotParentsFirst = useMemo(
-    () =>
-      data
-        ? (data as PlataType[])
-            .concat()
-            .sort((a, b) => (a.child.length > b.child.length ? -1 : 1))
-        : [],
-    [data],
-  );
 
   return (
     <Stack spacing={6} maxW="95%" w={{ md: "6xl" }} m="0 auto">
       <Heading size="lg" fontWeight="regular">
-        הוספת פלטה
+        ניהול פלטות
       </Heading>
-      <Center
-        flexDir="column"
-        bg="white"
-        shadow="md"
-        borderWidth={1}
-        px={[4, 12, 12]}
-        py={[8, 6, 12]}
-        rounded="xl"
-      >
-        <AddPlataForm
-          onSubmit={onSubmit}
-          platotList={sortedPlatotParentsFirst}
-          isLoading={isAddMutationLoading}
-        />
-      </Center>
-      <Heading size="lg" fontWeight="regular">
-        רשימת פלטות
-      </Heading>
-      <Center
-        flexDir="column"
-        bg="white"
-        shadow="md"
-        borderWidth={1}
-        px={[4, 12, 12]}
-        py={[8, 6, 12]}
-        rounded="xl"
-      >
-        <Stack spacing={6} w="100%">
+      <Center>
+        <Stack spacing={4} w="100%">
           {isLoading ? (
             <>
               <Skeletons length={4} height={16} />
             </>
           ) : (
-            <PlataList
-              onDelete={setSelectedPlata}
-              list={sortedPlatotParentsFirst}
-            />
+            <>
+              <AddPlataForm platot={data} />
+              {data.map((plata: PlataType) => (
+                <PlatotList
+                  {...plata}
+                  key={plata._id}
+                  collapsedPlata={collapsedPlata}
+                  setCollapsedPlata={setCollapsedPlata}
+                  setConfirmPlataDelete={setConfirmPlataDelete}
+                />
+              ))}
+            </>
           )}
         </Stack>
       </Center>
       <ConfirmDialog
         children="למחוק את הפלטה?"
-        onClose={() => setSelectedPlata(null)}
+        onClose={() => setConfirmPlataDelete("")}
         onDelete={onDelete}
-        isOpen={!!selectedPlata}
+        isOpen={!!confirmPlataDelete}
         isLoading={isDeleteMutationLoading}
       />
     </Stack>

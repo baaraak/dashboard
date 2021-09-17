@@ -1,100 +1,150 @@
 import {
+  Stack,
   Grid,
+  Flex,
   IconButton,
-  Accordion,
-  AccordionItem,
-  AccordionIcon,
-  AccordionButton,
-  AccordionPanel,
+  Text,
   Box,
+  Collapse,
 } from "@chakra-ui/react";
-import { Plata as PlataType } from "types/Plata";
-import { BiTrash } from "react-icons/bi";
-import { DeletePlataValues } from "./Plata";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { Plata } from "types/Plata";
+
+type Props = {
+  collapsedPlata?: string;
+  setCollapsedPlata: (id: string) => void;
+  setConfirmPlataDelete: (id: string) => void;
+};
 
 export default function PlatotList({
-  list,
-  onDelete,
-}: {
-  list: PlataType[];
-  onDelete: (data: DeletePlataValues) => void;
-}) {
-  return (
-    <>
-      {list.map((plata: PlataType) => (
-        <Grid
-          key={plata._id}
-          shadow="sm"
-          rounded="lg"
-          px={[3, 8]}
-          py={2}
-          minH={16}
-          templateColumns="1fr auto auto"
-          gridGap="4"
-          borderWidth="1px"
-          alignItems="center"
-        >
-          {plata.child.length ? (
-            <Accordion allowToggle>
-              <AccordionItem border="0">
-                <AccordionButton
-                  flexDirection="row-reverse"
-                  justifyContent="flex-end"
-                  fontWeight="semibold"
-                >
-                  {plata.name}
-                  <AccordionIcon />
-                </AccordionButton>
+  collapsedPlata,
+  setCollapsedPlata,
+  setConfirmPlataDelete,
+  ...plata
+}: Props & Plata) {
+  const onClickProps = {
+    transition: "all .2s ease-in",
+    cursor: "pointer",
 
-                <AccordionPanel py={4}>
-                  {plata.child.map((p: PlataType) => (
-                    <Grid
-                      key={p._id}
-                      shadow="sm"
-                      rounded="lg"
-                      px={[1, 4]}
-                      mb="2"
-                      py={1}
-                      templateColumns="1fr auto auto"
-                      gridGap="4"
-                      borderWidth="1px"
-                      alignItems="center"
-                    >
-                      <Box pr="1" fontSize="sm">
-                        {p.name}
-                      </Box>
-                      <Box fontSize="sm">{p.price} ₪</Box>
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() =>
-                          onDelete({
-                            _id: p._id,
-                            parent: plata._id,
-                          })
-                        }
-                      >
-                        <BiTrash />
-                      </IconButton>
-                    </Grid>
-                  ))}
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-          ) : (
-            <>
-              <Box>{plata.name}</Box>
-              <Box>{plata.price} ₪</Box>
-              <IconButton
-                aria-label="delete"
-                size="md"
-                onClick={() => onDelete({ _id: plata._id })}
+    onClick: () =>
+      collapsedPlata === plata._id
+        ? setCollapsedPlata("")
+        : setCollapsedPlata(plata._id),
+    _hover: {
+      borderColor: "blue.600",
+    },
+  };
+  return (
+    <Grid
+      key={plata._id}
+      gridTemplateColumns="1fr"
+      overflowX="auto"
+      pb={{ base: 6, md: 2 }}
+    >
+      <Grid
+        gridTemplateColumns="1fr 1fr 1fr"
+        px={{ base: 4, md: 12 }}
+        mb={2}
+        fontSize="xs"
+        fontWeight="semibold"
+        color="gray.700"
+      >
+        <Box>שם הפלטה</Box>
+        <Box>מחיקה</Box>
+      </Grid>
+
+      <Grid
+        gridTemplateColumns="1fr 1fr 1fr"
+        border="1px"
+        borderColor="gray.100"
+        minH={12}
+        alignItems="center"
+        px={{ base: 4, md: 12 }}
+        shadow="md"
+        bg="white"
+        rounded="xl"
+        color="gray.600"
+        pos="relative"
+        {...(plata.child.length > 0 ? onClickProps : {})}
+      >
+        {plata.child.length > 0 && (
+          <IconButton
+            pos="absolute"
+            left={3}
+            isRound
+            variant="outline"
+            aria-label="arrow"
+            colorScheme="facebook"
+            size="xs"
+            icon={
+              collapsedPlata === plata._id ? (
+                <IoIosArrowUp />
+              ) : (
+                <IoIosArrowDown />
+              )
+            }
+          />
+        )}
+
+        <Box>{plata.name}</Box>
+        <Flex fontSize="small">
+          <Text
+            borderBottom="1px"
+            borderColor="transparent"
+            color="red"
+            transition="border .2s ease-in"
+            onClick={(e) => {
+              e.stopPropagation(); // prevent collapse from opening
+              setConfirmPlataDelete(plata._id);
+            }}
+            _hover={{
+              borderColor: "red",
+            }}
+          >
+            מחיקה
+          </Text>
+        </Flex>
+      </Grid>
+      {plata.child.length > 0 && (
+        <Collapse in={collapsedPlata === plata._id}>
+          <Stack spacing={4} p={6}>
+            {plata.child.map((p) => (
+              <Flex
+                key={p._id}
+                border="1px"
+                borderColor="gray.100"
+                minH={10}
+                alignItems="center"
+                justifyContent="space-between"
+                px={{ base: 4, md: 12 }}
+                bg="white"
+                fontSize="small"
+                rounded="xl"
+                color="gray.600"
               >
-                <BiTrash />
-              </IconButton>
-            </>
-          )}
-        </Grid>
-      ))}
-    </>
+                <Box>{p.name}</Box>
+                <Flex>
+                  <Text
+                    borderBottom="1px"
+                    borderColor="transparent"
+                    color="red"
+                    transition="border .2s ease-in"
+                    cursor="pointer"
+                    onClick={(e) => {
+                      setConfirmPlataDelete(p._id);
+                    }}
+                    _hover={{
+                      borderColor: "red",
+                    }}
+                  >
+                    מחיקה
+                  </Text>
+                </Flex>
+              </Flex>
+            ))}
+          </Stack>
+        </Collapse>
+      )}
+    </Grid>
   );
 }
