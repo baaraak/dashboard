@@ -17,11 +17,9 @@ const theme = extendTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <React.Suspense fallback={"loading"}>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </React.Suspense>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root"),

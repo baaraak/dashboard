@@ -24,14 +24,14 @@ type UseDisclosureProps = {
 const Sidebar = ({ isOpen, onClose }: UseDisclosureProps) => {
   const location = useLocation();
 
-  const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
+  const [isSmallScreen] = useMediaQuery("(max-width: 992px)");
 
   if (isSmallScreen) return <MobileSidebar isOpen={isOpen} onClose={onClose} />;
 
   return (
     <Stack
       rounded="xl"
-      minW={{ md: "200px", lg: "270px" }}
+      minW={{ md: "230px", lg: "300px" }}
       transition="width .4s ease-in-out"
       py={8}
       bg="white"
@@ -64,7 +64,7 @@ const MobileSidebar = ({ isOpen, onClose }: UseDisclosureProps) => {
   return (
     <Drawer isOpen={isOpen} onClose={onClose}>
       <DrawerOverlay display={["initial", "initial", "none"]}>
-        <DrawerContent layerStyle="neutral" py={8}>
+        <DrawerContent layerStyle="neutral" py={8} overflowY="auto">
           <Stack spacing={2} fontSize="sm">
             <DrawerCloseButton />
             {AppRoutes.map((route) => (

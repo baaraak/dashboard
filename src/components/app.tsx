@@ -1,4 +1,5 @@
 import React from "react";
+import { Spinner, Center } from "@chakra-ui/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 import { useAuth } from "context/auth";
@@ -13,17 +14,25 @@ const UnAuthenticatedApp = React.lazy(
 function App() {
   const { user } = useAuth();
   return (
-    <Router>
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        {user ? (
-          <Layout>
-            <AuthenticatedApp />
-          </Layout>
-        ) : (
-          <UnAuthenticatedApp />
-        )}
-      </ErrorBoundary>
-    </Router>
+    <React.Suspense
+      fallback={
+        <Center>
+          <Spinner />
+        </Center>
+      }
+    >
+      <Router>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {user ? (
+            <Layout>
+              <AuthenticatedApp />
+            </Layout>
+          ) : (
+            <UnAuthenticatedApp />
+          )}
+        </ErrorBoundary>
+      </Router>
+    </React.Suspense>
   );
 }
 

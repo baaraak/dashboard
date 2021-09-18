@@ -12,6 +12,7 @@ const Layout = ({ children }: any) => {
 
   useEffect(() => {
     // runs only on location, i.e. route, change
+
     sidebarState.onClose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);

@@ -18,7 +18,7 @@ type Props = {
 
 const Header = ({ onToggle, isOpen, username, logout }: Props) => {
   const icon = isOpen ? CgClose : CgMenu;
-  const variant = useBreakpointValue({ base: "block", md: "none" });
+  const variant = useBreakpointValue({ base: "block", lg: "none" });
   return (
     <Flex
       layerStyle="card"

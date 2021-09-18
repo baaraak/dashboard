@@ -12,31 +12,22 @@ import {
 import { FaFileInvoice, FaReceipt } from "react-icons/fa";
 import { Switch, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Spinner, Center } from "@chakra-ui/react";
 
 const queryClient = new QueryClient();
 
 const Routes = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <React.Suspense
-        fallback={
-          <Center>
-            <Spinner />
-          </Center>
-        }
-      >
-        <Switch>
-          {AppRoutes.map((route) => {
-            const Component = route.component;
-            return (
-              <Route path={route.path} key={route.id} exact>
-                <Component />
-              </Route>
-            );
-          })}
-        </Switch>
-      </React.Suspense>
+      <Switch>
+        {AppRoutes.map((route) => {
+          const Component = route.component;
+          return (
+            <Route path={route.path} key={route.id} exact>
+              <Component />
+            </Route>
+          );
+        })}
+      </Switch>
     </QueryClientProvider>
   );
 };

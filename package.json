@@ -2,6 +2,7 @@
   "name": "roladinv2",
   "version": "0.1.0",
   "private": true,
+  "start_url": "https://roladin-v2.netlify.app/",
   "dependencies": {
     "@chakra-ui/react": "^1.6.7",
     "@emotion/react": "^11",
