@@ -1,5 +1,6 @@
 import { Box, Stack, useDisclosure } from "@chakra-ui/react";
-
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "./header";
 import Sidebar from "../modules/sidebar/sidebar";
 import { useAuth } from "context/auth";
@@ -7,6 +8,13 @@ import { useAuth } from "context/auth";
 const Layout = ({ children }: any) => {
   const sidebarState = useDisclosure();
   const { user, logout } = useAuth();
+  const location = useLocation();
+
+  useEffect(() => {
+    // runs only on location, i.e. route, change
+    sidebarState.onClose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   return (
     <>

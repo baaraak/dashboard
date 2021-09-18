@@ -37,6 +37,7 @@ export default function UsersList({
       gridTemplateColumns="1fr"
       overflowX="auto"
       pb={{ base: 6, md: 2 }}
+      fontSize="small"
     >
       <Grid
         gridTemplateColumns="1fr 1fr 1fr"

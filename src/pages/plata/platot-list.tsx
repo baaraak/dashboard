@@ -94,6 +94,7 @@ export default function PlatotList({
             borderColor="transparent"
             color="red"
             transition="border .2s ease-in"
+            cursor="pointer"
             onClick={(e) => {
               e.stopPropagation(); // prevent collapse from opening
               setConfirmPlataDelete(plata._id);
