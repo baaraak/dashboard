@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Stack, useToast, Heading, Center } from "@chakra-ui/react";
 
 import Skeletons from "components/skeletons";
@@ -35,6 +35,12 @@ export default function Plata() {
     setConfirmPlataDelete("");
   };
 
+  const platotList = useMemo(() => {
+    return (data as PlataType[])?.sort(
+      (a, b) => b.child.length - a.child.length,
+    );
+  }, [data]);
+
   return (
     <>
       <Heading size="lg" fontWeight="regular">
@@ -49,7 +55,7 @@ export default function Plata() {
           ) : (
             <>
               <AddPlataForm platot={data} />
-              {data.map((plata: PlataType) => (
+              {platotList.map((plata: PlataType) => (
                 <PlatotList
                   {...plata}
                   key={plata._id}
