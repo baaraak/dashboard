@@ -1,14 +1,6 @@
 import React, { useState, useRef } from "react";
 import ReactToPrint from "react-to-print";
-import {
-  Grid,
-  Stack,
-  Heading,
-  Center,
-  Button,
-  Input,
-  Box,
-} from "@chakra-ui/react";
+import { Grid, Heading, Center, Button, Input, Box } from "@chakra-ui/react";
 
 const Calculator = () => {
   const [result, updateResult] = useState<Sufganya[]>(SUFGANYOT);
@@ -30,7 +22,7 @@ const Calculator = () => {
   const totalPrice = result.reduce((a, s) => a + Number(s.sum[3]), 0);
 
   return (
-    <Stack spacing={6} maxW="95%" w={{ md: "6xl" }} m="0 auto">
+    <>
       <Heading size="lg" fontWeight="regular">
         מחשבון סופגניות
       </Heading>
@@ -112,7 +104,7 @@ const Calculator = () => {
           content={() => componentRef.current}
         />
       </Center>
-    </Stack>
+    </>
   );
 };
 

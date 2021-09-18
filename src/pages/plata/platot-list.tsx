@@ -40,6 +40,7 @@ export default function PlatotList({
       gridTemplateColumns="1fr"
       overflowX="auto"
       pb={{ base: 6, md: 2 }}
+      fontSize="small"
     >
       <Grid
         gridTemplateColumns="1fr 1fr 1fr"
@@ -50,7 +51,7 @@ export default function PlatotList({
         color="gray.700"
       >
         <Box>שם הפלטה</Box>
-        <Box>מחיקה</Box>
+        <Box textAlign="left">מחיקה</Box>
       </Grid>
 
       <Grid
@@ -87,7 +88,7 @@ export default function PlatotList({
         )}
 
         <Box>{plata.name}</Box>
-        <Flex fontSize="small">
+        <Flex justify="end">
           <Text
             borderBottom="1px"
             borderColor="transparent"
@@ -123,7 +124,7 @@ export default function PlatotList({
                 color="gray.600"
               >
                 <Box>{p.name}</Box>
-                <Flex>
+                <Flex justify="end">
                   <Text
                     borderBottom="1px"
                     borderColor="transparent"

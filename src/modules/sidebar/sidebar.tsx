@@ -2,15 +2,10 @@ import {
   Divider,
   Spacer,
   Stack,
-  IconButton,
-  LinkBox,
-  Tooltip,
-  LinkOverlay,
   Text,
   Link,
   Icon,
   BoxProps,
-  IconButtonProps,
   useMediaQuery,
   Drawer,
   DrawerOverlay,
@@ -29,16 +24,14 @@ type UseDisclosureProps = {
 const Sidebar = ({ isOpen, onClose }: UseDisclosureProps) => {
   const location = useLocation();
 
-  const NavAction = isOpen ? CollapsedItem : NavItem;
-
-  const [isSmallScreen] = useMediaQuery("(max-width: 1460px)");
+  const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
 
   if (isSmallScreen) return <MobileSidebar isOpen={isOpen} onClose={onClose} />;
 
   return (
     <Stack
       rounded="xl"
-      w={isOpen ? "60px" : "300px"}
+      minW={{ md: "200px", lg: "270px" }}
       transition="width .4s ease-in-out"
       py={8}
       bg="white"
@@ -48,11 +41,10 @@ const Sidebar = ({ isOpen, onClose }: UseDisclosureProps) => {
       fontSize="sm"
       height="fit-content"
       display={["none", "initial", "initial"]}
-      overflowX={isOpen ? "initial" : "clip"}
       divider={<Divider m="0 !important" />}
     >
       {AppRoutes.map((route) => (
-        <NavAction
+        <NavItem
           key={`nav-item-${route.id}`}
           active={location.pathname === route.path}
           name={route.name}
@@ -91,39 +83,6 @@ const MobileSidebar = ({ isOpen, onClose }: UseDisclosureProps) => {
   );
 };
 
-const CollapsedItem = (props: {
-  scheme?: IconButtonProps["colorScheme"];
-  icon: IconType;
-  active?: boolean;
-  path: string;
-  onClick?: () => void;
-  name: string;
-}) => {
-  return (
-    <Tooltip hasArrow label={props.name} placement="right">
-      <LinkBox display="flex" justifyContent="center">
-        <IconButton
-          colorScheme={props.active ? "brand" : props.scheme}
-          aria-label={props.name}
-          variant={props.active ? "solid" : "ghost"}
-          boxSize="40px"
-          alignSelf="center"
-          _focus={{ shadow: "none" }}
-          icon={
-            <>
-              <Link to={props.path} as={RouterLink}>
-                <LinkOverlay>
-                  <Icon as={props.icon} fontSize="lg" />
-                </LinkOverlay>
-              </Link>
-            </>
-          }
-        />
-      </LinkBox>
-    </Tooltip>
-  );
-};
-
 export type NavItemProps = {
   icon: IconType;
   active?: boolean;
@@ -155,7 +114,14 @@ const NavItem = (props: NavItemProps) => {
       >
         <Icon as={props.icon} fontSize="xl" />
 
-        <Text>{props.name}</Text>
+        <Text
+          whiteSpace="nowrap"
+          textOverflow="ellipsis"
+          overflow="hidden"
+          title={props.name}
+        >
+          {props.name}
+        </Text>
         <Spacer />
       </Stack>
     </Link>

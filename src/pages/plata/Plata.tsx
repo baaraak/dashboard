@@ -36,7 +36,7 @@ export default function Plata() {
   };
 
   return (
-    <Stack spacing={6} maxW="95%" w={{ md: "6xl" }} m="0 auto">
+    <>
       <Heading size="lg" fontWeight="regular">
         ניהול פלטות
       </Heading>
@@ -69,6 +69,6 @@ export default function Plata() {
         isOpen={!!confirmPlataDelete}
         isLoading={isDeleteMutationLoading}
       />
-    </Stack>
+    </>
   );
 }

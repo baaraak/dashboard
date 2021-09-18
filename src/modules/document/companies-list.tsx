@@ -63,6 +63,7 @@ const CompaniesList = ({
           gridTemplateColumns={{ base: "25% 1fr", md: "1fr" }}
           overflowX="auto"
           pb={{ base: 6, md: 2 }}
+          fontSize="small"
         >
           <Grid
             gridTemplateColumns={{ base: "1fr", md: "1fr 1fr 1fr" }}

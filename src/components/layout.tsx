@@ -15,7 +15,15 @@ const Layout = ({ children }: any) => {
         <Box pos="relative" h="max-content" m={[2, 0, 5]} pt={6}>
           <Stack direction="row" spacing={{ md: 5 }}>
             <Sidebar {...sidebarState} />
-            <Box w="full">{children}</Box>
+            <Stack
+              spacing={6}
+              w="100%"
+              maxW="6xl"
+              mx="auto !important"
+              px={{ base: 4, md: 6 }}
+            >
+              {children}
+            </Stack>
           </Stack>
         </Box>
       </Box>

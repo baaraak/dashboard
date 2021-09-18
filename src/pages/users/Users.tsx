@@ -52,7 +52,7 @@ export default function Users() {
   };
 
   return (
-    <Stack spacing={6} maxW="95%" w={{ md: "6xl" }} m="0 auto">
+    <>
       <Heading size="lg" fontWeight="regular">
         ניהול משתמשים
       </Heading>
@@ -86,6 +86,6 @@ export default function Users() {
         isOpen={!!confirmUserDelete}
         isLoading={isDeleteMutationLoading}
       />
-    </Stack>
+    </>
   );
 }

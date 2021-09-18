@@ -1,4 +1,12 @@
-import { Button, Flex, Stack, Text, IconButton, Icon } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Stack,
+  Text,
+  IconButton,
+  Icon,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { CgClose, CgMenu } from "react-icons/cg";
 
 type Props = {
@@ -10,7 +18,7 @@ type Props = {
 
 const Header = ({ onToggle, isOpen, username, logout }: Props) => {
   const icon = isOpen ? CgClose : CgMenu;
-
+  const variant = useBreakpointValue({ base: "block", md: "none" });
   return (
     <Flex
       layerStyle="card"
@@ -27,6 +35,7 @@ const Header = ({ onToggle, isOpen, username, logout }: Props) => {
         <IconButton
           colorScheme="brand"
           variant="ghost"
+          display={variant}
           fontSize="2xl"
           aria-label="Toggle Actions"
           icon={<Icon as={icon} />}
