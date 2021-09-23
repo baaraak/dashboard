@@ -108,7 +108,7 @@ export default function PlatotList({
         </Flex>
       </Grid>
       {plata.child.length > 0 && (
-        <Collapse in={collapsedPlata === plata._id}>
+        <Collapse in={collapsedPlata === plata._id} startingHeight={0}>
           <Stack spacing={4} p={6}>
             {plata.child.map((p) => (
               <Flex

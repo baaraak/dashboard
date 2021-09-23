@@ -108,7 +108,7 @@ export default function UsersList({
           </Text>
         </Flex>
       </Grid>
-      <Collapse in={collapsedUser === user._id}>
+      <Collapse in={collapsedUser === user._id} startingHeight={0}>
         <SpinnerContainer isLoading={isPermissionsLoading}>
           <SimpleGrid spacing={4} columns={[2, 3, 4]} p={{ base: 2, md: 5 }}>
             {Permissions.map((p) => (
