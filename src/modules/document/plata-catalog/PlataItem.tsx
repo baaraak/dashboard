@@ -13,6 +13,8 @@ const PlataItem = (props: any) => {
       color="gray.700"
       cursor="pointer"
       padding={2}
+      minH="120px"
+      minW="120px"
       {...props}
       sx={{ aspectRatio: "1/1" }}
       transition="all .2s ease-in"

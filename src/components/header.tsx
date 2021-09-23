@@ -6,6 +6,7 @@ import {
   IconButton,
   Icon,
   useBreakpointValue,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { CgClose, CgMenu } from "react-icons/cg";
 
@@ -18,6 +19,7 @@ type Props = {
 
 const Header = ({ onToggle, isOpen, username, logout }: Props) => {
   const icon = isOpen ? CgClose : CgMenu;
+  const [isSmallScreen] = useMediaQuery("(max-width: 1024px)");
   const variant = useBreakpointValue({ base: "block", lg: "none" });
   return (
     <Flex
@@ -35,7 +37,7 @@ const Header = ({ onToggle, isOpen, username, logout }: Props) => {
         <IconButton
           colorScheme="brand"
           variant="ghost"
-          display={variant}
+          display={isSmallScreen ? "block" : "none"}
           fontSize="2xl"
           aria-label="Toggle Actions"
           icon={<Icon as={icon} />}

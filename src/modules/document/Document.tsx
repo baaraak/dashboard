@@ -131,7 +131,7 @@ export default function Document({ mutate, isLoading, data, reset }: Props) {
       </Steps>
 
       {!data?.success && (
-        <Flex width="100%" justify="flex-end">
+        <Flex width="100%" justify="flex-end" pb={4}>
           <Button
             ml={4}
             variant="ghost"

@@ -72,7 +72,11 @@ export function CatalogDetailsTable({
               </Td>
 
               <Td fontSize="xs">&#8362;{o.price && o.price * o.quantity}</Td>
-              <Td fontSize="md" onClick={() => onRemovePlata(o.name)}>
+              <Td
+                fontSize="md"
+                onClick={() => onRemovePlata(o.name)}
+                color="red.300"
+              >
                 <BiTrash className="removeCircleIcon" />
               </Td>
             </Tr>
