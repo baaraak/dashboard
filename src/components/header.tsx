@@ -20,7 +20,7 @@ type Props = {
 const Header = ({ onToggle, isOpen, username, logout }: Props) => {
   const icon = isOpen ? CgClose : CgMenu;
   const [isSmallScreen] = useMediaQuery("(max-width: 1024px)");
-  const variant = useBreakpointValue({ base: "block", lg: "none" });
+
   return (
     <Flex
       layerStyle="card"
