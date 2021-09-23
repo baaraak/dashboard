@@ -40,7 +40,7 @@ export default function PlataRow({
         key={plata._id}
         gridTemplateColumns="1fr"
         overflowX="auto"
-        pb={{ base: 6, md: 2 }}
+        pb={{ base: 4, md: 2 }}
         fontSize="small"
       >
         <Grid
@@ -69,24 +69,23 @@ export default function PlataRow({
           pos="relative"
           {...(plata.child.length > 0 ? onClickProps : {})}
         >
-          {plata.child.length > 0 && (
-            <IconButton
-              pos="absolute"
-              left={3}
-              isRound
-              variant="outline"
-              aria-label="arrow"
-              colorScheme="facebook"
-              size="xs"
-              icon={
-                collapsedPlata === plata._id ? (
-                  <IoIosArrowUp />
-                ) : (
-                  <IoIosArrowDown />
-                )
-              }
-            />
-          )}
+          <IconButton
+            pos="absolute"
+            d={plata.child.length > 0 ? "flex" : "none"}
+            left={3}
+            isRound
+            variant="outline"
+            aria-label="arrow"
+            colorScheme="facebook"
+            size="xs"
+            icon={
+              collapsedPlata === plata._id ? (
+                <IoIosArrowUp />
+              ) : (
+                <IoIosArrowDown />
+              )
+            }
+          />
 
           <Box>{plata.name}</Box>
           <Flex justify="end">
@@ -111,7 +110,7 @@ export default function PlataRow({
       </Grid>
       {plata.child.length > 0 && (
         <Collapse in={collapsedPlata === plata._id} startingHeight={0}>
-          <Stack spacing={4} p={6}>
+          <Stack spacing={4} mb={4}>
             {plata.child.map((p) => (
               <Flex
                 key={p._id}

@@ -32,85 +32,87 @@ export default function UserRow({
   ...user
 }: Props & User) {
   return (
-    <Grid
-      key={user._id}
-      gridTemplateColumns="1fr"
-      overflowX="auto"
-      pb={{ base: 6, md: 2 }}
-      fontSize="small"
-    >
+    <>
       <Grid
-        gridTemplateColumns="1fr 1fr 1fr"
-        px={{ base: 4, md: 12 }}
-        mb={2}
-        fontSize="xs"
-        fontWeight="semibold"
-        color="gray.700"
+        key={user._id}
+        gridTemplateColumns="1fr"
+        overflowX="auto"
+        pb={{ base: 4, md: 2 }}
+        fontSize="small"
       >
-        <Box>שם משתמש</Box>
-        <Box>תאריך יצירה</Box>
-        <Box>פעולות</Box>
-      </Grid>
+        <Grid
+          gridTemplateColumns="1fr 1fr 1fr"
+          px={{ base: 4, md: 12 }}
+          mb={2}
+          fontSize="xs"
+          fontWeight="semibold"
+          color="gray.700"
+        >
+          <Box>שם משתמש</Box>
+          <Box>תאריך יצירה</Box>
+          <Box>פעולות</Box>
+        </Grid>
 
-      <Grid
-        gridTemplateColumns="1fr 1fr 1fr"
-        border="1px"
-        borderColor="gray.100"
-        minH={12}
-        alignItems="center"
-        px={{ base: 4, md: 12 }}
-        shadow="md"
-        bg="white"
-        rounded="xl"
-        color="gray.600"
-        transition="all .2s ease-in"
-        cursor="pointer"
-        onClick={() =>
-          collapsedUser === user._id
-            ? setCollapsedUser("")
-            : setCollapsedUser(user._id)
-        }
-        _hover={{
-          borderColor: "blue.600",
-        }}
-        pos="relative"
-      >
-        <IconButton
-          pos="absolute"
-          left={3}
-          isRound
-          variant="outline"
-          aria-label="arrow"
-          colorScheme="facebook"
-          size="xs"
-          icon={
-            collapsedUser === user._id ? <IoIosArrowUp /> : <IoIosArrowDown />
+        <Grid
+          gridTemplateColumns="1fr 1fr 1fr"
+          border="1px"
+          borderColor="gray.100"
+          minH={12}
+          alignItems="center"
+          px={{ base: 4, md: 12 }}
+          shadow="md"
+          bg="white"
+          rounded="xl"
+          color="gray.600"
+          transition="all .2s ease-in"
+          cursor="pointer"
+          onClick={() =>
+            collapsedUser === user._id
+              ? setCollapsedUser("")
+              : setCollapsedUser(user._id)
           }
-        />
+          _hover={{
+            borderColor: "blue.600",
+          }}
+          pos="relative"
+        >
+          <IconButton
+            pos="absolute"
+            left={3}
+            isRound
+            variant="outline"
+            aria-label="arrow"
+            colorScheme="facebook"
+            size="xs"
+            icon={
+              collapsedUser === user._id ? <IoIosArrowUp /> : <IoIosArrowDown />
+            }
+          />
 
-        <Box>{user.username}</Box>
-        <Box>{new Date(user.createdAt).toLocaleDateString("he")}</Box>
-        <Flex fontSize="small">
-          <Text
-            borderBottom="1px"
-            borderColor="transparent"
-            color="red"
-            transition="border .2s ease-in"
-            onClick={(e) => {
-              e.stopPropagation(); // prevent collapse from opening
-              setConfirmUserDelete(user._id);
-            }}
-            _hover={{
-              borderColor: "red",
-            }}
-          >
-            מחיקה
-          </Text>
-        </Flex>
+          <Box>{user.username}</Box>
+          <Box>{new Date(user.createdAt).toLocaleDateString("he")}</Box>
+          <Flex fontSize="small">
+            <Text
+              borderBottom="1px"
+              borderColor="transparent"
+              color="red"
+              transition="border .2s ease-in"
+              onClick={(e) => {
+                e.stopPropagation(); // prevent collapse from opening
+                setConfirmUserDelete(user._id);
+              }}
+              _hover={{
+                borderColor: "red",
+              }}
+            >
+              מחיקה
+            </Text>
+          </Flex>
+        </Grid>
       </Grid>
       <Collapse in={collapsedUser === user._id} startingHeight={0}>
         <SpinnerContainer isLoading={isPermissionsLoading}>
-          <SimpleGrid spacing={4} columns={[2, 3, 4]} p={{ base: 2, md: 5 }}>
+          <SimpleGrid spacing={4} columns={[2, 3, 4]}>
             {Permissions.map((p) => (
               <FormControl display="flex" alignItems="center" key={p.id}>
                 <Switch
@@ -123,6 +125,7 @@ export default function UserRow({
                   htmlFor={p.id}
                   mb="0"
                   color="gray.500"
+                  fontSize="sm"
                   cursor="pointer"
                   transition="color .1s ease"
                   _hover={{ color: "gray.700" }}
@@ -134,6 +137,6 @@ export default function UserRow({
           </SimpleGrid>
         </SpinnerContainer>
       </Collapse>
-    </Grid>
+    </>
   );
 }
