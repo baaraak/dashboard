@@ -7,6 +7,9 @@
     }
 }
 
+.chakra-modal__content-container {
+    padding: 20px;
+}
 
 /*
  * Add styles to `react-datepicker` package to match chakra-ui styles 

@@ -35,77 +35,79 @@ export default function PlatotList({
     },
   };
   return (
-    <Grid
-      key={plata._id}
-      gridTemplateColumns="1fr"
-      overflowX="auto"
-      pb={{ base: 6, md: 2 }}
-      fontSize="small"
-    >
+    <>
       <Grid
-        gridTemplateColumns="1fr 1fr 1fr"
-        px={{ base: 4, md: 12 }}
-        mb={2}
-        fontSize="xs"
-        fontWeight="semibold"
-        color="gray.700"
+        key={plata._id}
+        gridTemplateColumns="1fr"
+        overflowX="auto"
+        pb={{ base: 6, md: 2 }}
+        fontSize="small"
       >
-        <Box>שם הפלטה</Box>
-        <Box textAlign="left">מחיקה</Box>
-      </Grid>
+        <Grid
+          gridTemplateColumns="1fr 1fr 1fr"
+          px={{ base: 4, md: 12 }}
+          mb={2}
+          fontSize="xs"
+          fontWeight="semibold"
+          color="gray.700"
+        >
+          <Box>שם הפלטה</Box>
+          <Box textAlign="left">מחיקה</Box>
+        </Grid>
 
-      <Grid
-        gridTemplateColumns="1fr 1fr 1fr"
-        border="1px"
-        borderColor="gray.100"
-        minH={12}
-        alignItems="center"
-        px={{ base: 4, md: 12 }}
-        shadow="md"
-        bg="white"
-        rounded="xl"
-        color="gray.600"
-        pos="relative"
-        {...(plata.child.length > 0 ? onClickProps : {})}
-      >
-        {plata.child.length > 0 && (
-          <IconButton
-            pos="absolute"
-            left={3}
-            isRound
-            variant="outline"
-            aria-label="arrow"
-            colorScheme="facebook"
-            size="xs"
-            icon={
-              collapsedPlata === plata._id ? (
-                <IoIosArrowUp />
-              ) : (
-                <IoIosArrowDown />
-              )
-            }
-          />
-        )}
+        <Grid
+          gridTemplateColumns="1fr 1fr 1fr"
+          border="1px"
+          borderColor="gray.100"
+          minH={12}
+          alignItems="center"
+          px={{ base: 4, md: 12 }}
+          shadow="md"
+          bg="white"
+          rounded="xl"
+          color="gray.600"
+          pos="relative"
+          {...(plata.child.length > 0 ? onClickProps : {})}
+        >
+          {plata.child.length > 0 && (
+            <IconButton
+              pos="absolute"
+              left={3}
+              isRound
+              variant="outline"
+              aria-label="arrow"
+              colorScheme="facebook"
+              size="xs"
+              icon={
+                collapsedPlata === plata._id ? (
+                  <IoIosArrowUp />
+                ) : (
+                  <IoIosArrowDown />
+                )
+              }
+            />
+          )}
 
-        <Box>{plata.name}</Box>
-        <Flex justify="end">
-          <Text
-            borderBottom="1px"
-            borderColor="transparent"
-            color="red"
-            transition="border .2s ease-in"
-            cursor="pointer"
-            onClick={(e) => {
-              e.stopPropagation(); // prevent collapse from opening
-              setConfirmPlataDelete(plata._id);
-            }}
-            _hover={{
-              borderColor: "red",
-            }}
-          >
-            מחיקה
-          </Text>
-        </Flex>
+          <Box>{plata.name}</Box>
+          <Flex justify="end">
+            <Text
+              borderBottom="1px"
+              borderColor="transparent"
+              color="red"
+              transition="border .2s ease-in"
+              cursor="pointer"
+              onClick={(e) => {
+                e.stopPropagation(); // prevent collapse from opening
+                setConfirmPlataDelete(plata._id);
+              }}
+              _hover={{
+                borderColor: "red",
+              }}
+            >
+              מחיקה
+            </Text>
+          </Flex>
+        </Grid>
       </Grid>
       {plata.child.length > 0 && (
         <Collapse in={collapsedPlata === plata._id} startingHeight={0}>
@@ -147,6 +149,6 @@ export default function PlatotList({
           </Stack>
         </Collapse>
       )}
-    </Grid>
+    </>
   );
 }
