@@ -23,7 +23,7 @@ type Props = {
   onPermissions: (userId: string, permissionId: string) => void;
 };
 
-export default function UsersList({
+export default function UserRow({
   collapsedUser,
   setCollapsedUser,
   setConfirmUserDelete,

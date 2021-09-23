@@ -16,7 +16,7 @@ type Props = {
   setConfirmPlataDelete: (id: string) => void;
 };
 
-export default function PlatotList({
+export default function PlataRow({
   collapsedPlata,
   setCollapsedPlata,
   setConfirmPlataDelete,

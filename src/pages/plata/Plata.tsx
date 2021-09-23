@@ -5,7 +5,7 @@ import Skeletons from "components/skeletons";
 import ConfirmDialog from "components/confirm-dialog";
 
 import { usePlatot } from "hooks/plata/usePlatot";
-import PlatotList from "./platot-list";
+import PlataRow from "./plata-row";
 import { Plata as PlataType } from "types/Plata";
 import AddPlataForm from "./add-plata-form";
 import { useDeletePlata } from "hooks/plata/useDeletePlata";
@@ -56,7 +56,7 @@ export default function Plata() {
             <>
               <AddPlataForm platot={data} />
               {platotList.map((plata: PlataType) => (
-                <PlatotList
+                <PlataRow
                   {...plata}
                   key={plata._id}
                   collapsedPlata={collapsedPlata}

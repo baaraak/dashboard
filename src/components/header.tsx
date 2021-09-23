@@ -5,7 +5,6 @@ import {
   Text,
   IconButton,
   Icon,
-  useBreakpointValue,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { CgClose, CgMenu } from "react-icons/cg";

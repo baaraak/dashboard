@@ -5,7 +5,7 @@ import Skeletons from "components/skeletons";
 import { useUsers } from "hooks/user/useUsers";
 import { User } from "types/User";
 import ConfirmDialog from "components/confirm-dialog";
-import UsersList from "./users-list";
+import UserRow from "./user-row";
 import AddUser from "./add-user";
 import { useDeleteUser } from "hooks/user/useDeleteUser";
 import { useUpdatePermission } from "hooks/user/useUpdatePermission";
@@ -66,7 +66,7 @@ export default function Users() {
             </>
           ) : (
             data.map((user: User) => (
-              <UsersList
+              <UserRow
                 {...user}
                 key={user._id}
                 collapsedUser={collapsedUser}
