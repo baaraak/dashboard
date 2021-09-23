@@ -6,7 +6,7 @@ import {
   Spinner,
   useDisclosure,
 } from "@chakra-ui/react";
-import { usePlatot } from "hooks/usePlatot";
+import { usePlatot } from "hooks/plata/usePlatot";
 import { DocumentItem } from "../../../context/document";
 import { Plata } from "types/Plata";
 import { getCatalogLength, getCatalogPriceSum } from "./PlataCatalog.services";

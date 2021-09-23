@@ -4,11 +4,11 @@ import { Stack, useToast, Heading, Center } from "@chakra-ui/react";
 import Skeletons from "components/skeletons";
 import ConfirmDialog from "components/confirm-dialog";
 
-import { usePlatot } from "hooks/usePlatot";
+import { usePlatot } from "hooks/plata/usePlatot";
 import PlatotList from "./platot-list";
 import { Plata as PlataType } from "types/Plata";
 import AddPlataForm from "./add-plata-form";
-import { useDeletePlata } from "hooks/useDeletePlata";
+import { useDeletePlata } from "hooks/plata/useDeletePlata";
 
 export type AddPlataValues = {
   name: string;

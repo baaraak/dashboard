@@ -21,7 +21,7 @@ import { useForm, Controller } from "react-hook-form";
 import InputField from "components/input-field";
 import Select from "components/multi-select";
 import { Permissions } from "services/permissions";
-import { useAddUser } from "hooks/useAddUser";
+import { useAddUser } from "hooks/user/useAddUser";
 import FeedbackMessage from "components/feedback-message";
 
 export type NewUserType = {

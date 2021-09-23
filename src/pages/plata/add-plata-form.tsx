@@ -21,7 +21,7 @@ import { useForm, Controller } from "react-hook-form";
 import InputField from "components/input-field";
 import Select from "components/multi-select";
 import FeedbackMessage from "components/feedback-message";
-import { useAddPlata } from "hooks/useAddPlata";
+import { useAddPlata } from "hooks/plata/useAddPlata";
 import { Plata } from "types/Plata";
 
 export type NewPlataType = {

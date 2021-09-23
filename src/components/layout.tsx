@@ -12,8 +12,9 @@ const Layout = ({ children }: any) => {
 
   useEffect(() => {
     // runs only on location, i.e. route, change
+    sidebarState.onClose(); // close sidebar (if mobile)
+    window.scrollTo(0, 0); // restore scroll to top
 
-    sidebarState.onClose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
