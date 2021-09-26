@@ -2,8 +2,6 @@ import React from "react";
 import { IconType } from "react-icons/lib";
 import { RiDashboardLine, RiExchangeDollarLine } from "react-icons/ri";
 import { BiCalculator } from "react-icons/bi";
-import { FiTruck } from "react-icons/fi";
-import { BsCardList } from "react-icons/bs";
 import {
   AiOutlineEdit,
   AiOutlineTable,
@@ -71,20 +69,20 @@ export const AppRoutes: RoutesType[] = [
     component: React.lazy(() => import("./order/Order")),
     icon: FaReceipt,
   },
-  {
-    id: "suppliers/order",
-    name: "קבלת סחורה",
-    path: "/supplier/order",
-    component: React.lazy(() => import("./supplier/Order")),
-    icon: FiTruck,
-  },
-  {
-    id: "suppliers/reports",
-    name: "דוחות סחורה מספקים",
-    path: "/supplier/reports",
-    component: React.lazy(() => import("./supplier/Reports")),
-    icon: BsCardList,
-  },
+  // {
+  //   id: "suppliers/order",
+  //   name: "קבלת סחורה",
+  //   path: "/supplier/order",
+  //   component: React.lazy(() => import("./supplier/Order")),
+  //   icon: FiTruck,
+  // },
+  // {
+  //   id: "suppliers/reports",
+  //   name: "דוחות סחורה מספקים",
+  //   path: "/supplier/reports",
+  //   component: React.lazy(() => import("./supplier/Reports")),
+  //   icon: BsCardList,
+  // },
   {
     id: "plata",
     name: "עריכת פלטות",
